@@ -1,0 +1,24 @@
+
+#homepage-container {
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    #homepage-inner {
+        width: 98%;
+        max-width: 1600px;
+
+        .text-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    #coverImg {
+        height: 650px;
+    }
+}

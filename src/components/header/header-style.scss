@@ -5,6 +5,9 @@
     background-color: #fff;
     color: black;
     font-family: 'New Tegomin', serif;
+    z-index: 1000;
+    position: fixed;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
