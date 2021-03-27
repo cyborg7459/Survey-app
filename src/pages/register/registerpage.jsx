@@ -1,9 +1,10 @@
 import React from 'react';
-// import {  withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import validator from 'email-validator';
 
 import Loader from '../../components/loader/loader.component';
 import { auth, firestore } from '../../firebase/firebase.utils';
+import { setUser } from '../../redux/users/user-actions';
 
 class RegisterPage extends React.Component {
     state = {
@@ -53,6 +54,7 @@ class RegisterPage extends React.Component {
             this.setState({
                 isLoading : false
             })
+            this.props.setUser(user);
             this.props.history.push('/');
         } 
         catch(err) {
@@ -86,4 +88,8 @@ class RegisterPage extends React.Component {
     }
 }
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch => ({
+    setUser : user => dispatch(setUser(user))
+});
+
+export default connect(null,mapDispatchToProps)(RegisterPage);
