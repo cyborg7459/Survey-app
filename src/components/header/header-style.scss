@@ -14,7 +14,10 @@
     box-shadow: 0px 0px 10px rgba(0,0,0,0.14), 0px 0px 40px rgba(0,0,0,0.04);
 
     #header {
-        width: 98%;
+        width: 95%;
         max-width: 1400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
