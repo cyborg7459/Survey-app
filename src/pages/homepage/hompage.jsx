@@ -1,9 +1,10 @@
 import './homepage-style.scss';
+import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 import coverimg from '../../gallery/main.svg';
 
-const Homepage = () => {
+const Homepage = (...props) => {
     return (
         <div id="homepage-container">
             <Row id="homepage-inner">
@@ -16,11 +17,13 @@ const Homepage = () => {
                     <p className='size16'>Participate in surveys ranging a variety of topics from sports to politics to education to science. Compare your views with the general ones. 
                     <br/> <br/> Or create your own survey and share among your friends
                     </p>
-                    <div className="btn btn-lg">Get started</div>
+                    <div onClick = {() => {
+                        props[0].history.push('/login');
+                    }} className="btn btn-lg">Get started</div>
                 </Col>
             </Row>
         </div>
     )
 }
 
-export default Homepage;
+export default withRouter(Homepage);

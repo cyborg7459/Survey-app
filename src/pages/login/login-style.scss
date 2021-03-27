@@ -1,0 +1,15 @@
+.loginpage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    .login-form {
+        width: 500px;
+        background: #fff;
+        padding: 40px 45px;
+        box-shadow: 1px 1px 7px rgba(0,0,0,0.14);
+        border-radius: 35px;
+        // border: 1px solid #b8b8b8;
+    }
+}

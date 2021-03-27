@@ -23,3 +23,15 @@ body {
   border-radius: 15px;
   padding: 12px;
 }
+
+.input {
+  width: 100%;
+  margin: 10px 0px;
+  padding: 8px 10px;
+  border: none;
+  border-bottom: 1px solid #cfcccc;
+}
+
+.input:focus {
+  outline: none;
+}
