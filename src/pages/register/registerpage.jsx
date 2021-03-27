@@ -1,6 +1,5 @@
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
-import './register-style.scss';
 
 class RegisterPage extends React.Component {
     render() {

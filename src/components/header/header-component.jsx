@@ -2,7 +2,6 @@ import './header-style.scss';
 import { withRouter } from 'react-router-dom';
 
 const Header = (...props) => {
-    console.log(props);
     return (
         <div id="header-container">
             <div id="header">
