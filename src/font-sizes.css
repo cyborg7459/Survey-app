@@ -1,0 +1,249 @@
+.size1 {
+    font-size: 0.1rem!important;
+}
+.size2 {
+    font-size: 0.2rem!important;
+}
+.size3 {
+    font-size: 0.3rem!important;
+}
+.size4 {
+    font-size: 0.4rem!important;
+}
+.size5 {
+    font-size: 0.5rem!important;
+}
+.size6 {
+    font-size: 0.6rem!important;
+}
+.size7 {
+    font-size: 0.7rem!important;
+}
+.size8 {
+    font-size: 0.8rem!important;
+}
+.size9 {
+    font-size: 0.9rem!important;
+}
+.size10 {
+    font-size: 1rem!important;
+}
+.size11 {
+    font-size: 1.1rem!important;
+}
+.size12 {
+    font-size: 1.2rem!important;
+}
+.size13 {
+    font-size: 1.3rem!important;
+}
+.size14 {
+    font-size: 1.4rem!important;
+}
+.size15 {
+    font-size: 1.5rem!important;
+}
+.size16 {
+    font-size: 1.6rem!important;
+}
+.size17 {
+    font-size: 1.7rem!important;
+}
+.size18 {
+    font-size: 1.8rem!important;
+}
+.size19 {
+    font-size: 1.9rem!important;
+}
+.size20 {
+    font-size: 2.0rem!important;
+}
+.size21 {
+    font-size: 2.1rem!important;
+}
+.size22 {
+    font-size: 2.2rem!important;
+}
+.size23 {
+    font-size: 2.3rem!important;
+}
+.size24 {
+    font-size: 2.4rem!important;
+}
+.size25 {
+    font-size: 2.5rem!important;
+}
+.size26 {
+    font-size: 2.6rem!important;
+}
+.size27 {
+    font-size: 2.7rem!important;
+}
+.size28 {
+    font-size: 2.8rem!important;
+}
+.size29 {
+    font-size: 2.9rem!important;
+}
+.size30 {
+    font-size: 3.0rem!important;
+}
+.size31 {
+    font-size: 3.1rem!important;
+}
+.size32 {
+    font-size: 3.2rem!important;
+}
+.size33 {
+    font-size: 3.3rem!important;
+}
+.size34 {
+    font-size: 3.4rem!important;
+}
+.size35 {
+    font-size: 3.5rem!important;
+}
+.size36 {
+    font-size: 3.6rem!important;
+}
+.size37 {
+    font-size: 3.7rem!important;
+}
+.size38 {
+    font-size: 3.8rem!important;
+}
+.size39 {
+    font-size: 3.9rem!important;
+}
+.size40 {
+    font-size: 4.0rem!important;
+}
+.size41 {
+    font-size: 4.1rem!important;
+}
+.size42 {
+    font-size: 4.2rem!important;
+}
+.size43 {
+    font-size: 4.3rem!important;
+}
+.size44 {
+    font-size: 4.4rem!important;
+}
+.size45 {
+    font-size: 4.5rem!important;
+}
+.size46 {
+    font-size: 4.6rem!important;
+}
+.size47 {
+    font-size: 4.7rem!important;
+}
+.size48 {
+    font-size: 4.8rem!important;
+}
+.size49 {
+    font-size: 4.9rem!important;
+}
+.size50 {
+    font-size: 5.0rem!important;
+}
+
+@media(max-width: 700px) {
+    .size19 {
+        font-size: 0.9rem!important;
+    }
+    .size20 {
+        font-size: 1.0rem!important;
+    }
+    .size21 {
+        font-size: 1.1rem!important;
+    }
+    .size22 {
+        font-size: 1.2rem!important;
+    }
+    .size23 {
+        font-size: 1.3rem!important;
+    }
+    .size24 {
+        font-size: 1.4rem!important;
+    }
+    .size25 {
+        font-size: 1.5rem!important;
+    }
+    .size26 {
+        font-size: 1.6rem!important;
+    }
+    .size27 {
+        font-size: 1.7rem!important;
+    }
+    .size28 {
+        font-size: 1.8rem!important;
+    }
+    .size29 {
+        font-size: 1.9rem!important;
+    }
+    .size30 {
+        font-size: 2.0rem!important;
+    }
+    .size31 {
+        font-size: 2.1rem!important;
+    }
+    .size32 {
+        font-size: 2.2rem!important;
+    }
+    .size33 {
+        font-size: 2.3rem!important;
+    }
+    .size34 {
+        font-size: 2.4rem!important;
+    }
+    .size35 {
+        font-size: 2.5rem!important;
+    }
+    .size36 {
+        font-size: 2.6rem!important;
+    }
+    .size37 {
+        font-size: 2.7rem!important;
+    }
+    .size38 {
+        font-size: 2.8rem!important;
+    }
+    .size39 {
+        font-size: 2.9rem!important;
+    }
+    .size40 {
+        font-size: 3.0rem!important;
+    }
+    .size41 {
+        font-size: 3.1rem!important;
+    }
+    .size42 {
+        font-size: 3.2rem!important;
+    }
+    .size43 {
+        font-size: 3.3rem!important;
+    }
+    .size44 {
+        font-size: 3.4rem!important;
+    }
+    .size45 {
+        font-size: 3.5rem!important;
+    }
+    .size46 {
+        font-size: 3.6rem!important;
+    }
+    .size47 {
+        font-size: 3.7rem!important;
+    }
+    .size48 {
+        font-size: 3.8rem!important;
+    }
+    .size49 {
+        font-size: 3.9rem!important;
+    }
+    .size50 {
+        font-size: 4.0rem!important;
+    }
+}
