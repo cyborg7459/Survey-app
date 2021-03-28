@@ -33,6 +33,7 @@ class LoginPage extends React.Component {
             const userRef = firestore.collection('users');
             const reqUserRef = userRef.where('uid', '==', user.user.uid);
             const reqUserSnapshot = await reqUserRef.get();
+            console.log(reqUserSnapshot.docs[0].id);
             const loggedInUser = reqUserSnapshot.docs[0].data();
             this.props.setUser(loggedInUser);
             this.props.history.push('/');
