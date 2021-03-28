@@ -11,6 +11,8 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 surveys : action.payload
             }
+        default:
+            return state
     }
 }
 
