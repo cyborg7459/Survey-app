@@ -26,8 +26,19 @@ class SurveyPage extends React.Component {
         const questionsRef = surveyRef.collection('questions');
         const questionsSnapshot = await questionsRef.get();
         let questions = [];
-        questionsSnapshot.docs.map(question => {
-            questions.push(question.id);
+        questionsSnapshot.docs.map(async question => {
+            let curQuestion = question.data();
+            curQuestion.id = question.id;
+            const optionsRef = questionsRef.doc(question.id).collection('options');
+            const optionsSnapshot = await optionsRef.get();
+            let options = [];
+            optionsSnapshot.docs.map(option => {
+                const optionDetails = option.data();
+                optionDetails.id = option.id;
+                options.push(optionDetails);
+            })
+            curQuestion.options = options;
+            questions.push(curQuestion);
         })
         this.setState({
             surveyDetails : surveySnapshot.data(),
