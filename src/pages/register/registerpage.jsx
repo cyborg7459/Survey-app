@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import validator from 'email-validator';
+import { withRouter } from 'react-router-dom';
 
 import Loader from '../../components/loader/loader.component';
 import { auth, firestore } from '../../firebase/firebase.utils';
@@ -37,6 +38,8 @@ class RegisterPage extends React.Component {
             const newUser = await auth.createUserWithEmailAndPassword(user.email, user.pass);
             user.uid = newUser.user.uid;
             delete user["pass"];
+            user.surveysFilled = [];
+            user.surveysOwned = [];
             this.addUserToDatabase(user);
         } catch(err) {
             this.setState({
@@ -92,4 +95,4 @@ const mapDispatchToProps = dispatch => ({
     setUser : user => dispatch(setUser(user))
 });
 
-export default connect(null,mapDispatchToProps)(RegisterPage);
+export default withRouter(connect(null,mapDispatchToProps)(RegisterPage));
