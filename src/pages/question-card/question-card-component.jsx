@@ -3,11 +3,13 @@ import React from 'react';
 import './question-card-style.csss';
 
 class QuestionCard extends React.Component {
-    
-    state = {
-
+    render() {
+        return (
+            <div className="question-card">
+                <h1>{this.props.question.title}</h1>
+            </div>
+        )
     }
-
-    comp
-
 }
+
+export default QuestionCard;
