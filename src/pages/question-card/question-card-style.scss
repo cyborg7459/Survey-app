@@ -11,12 +11,18 @@
     .option {
         display: flex;
         justify-content: center;
-        color: white;
-        margin: 10px 0px;
+        color: #fff;
+        margin: 7px 0px;
         padding: 5px 0px;
         border-radius: 7px;
-        background-color: #5047DA;
+        // border: 1px solid #5047DA;
+        background-color: #ed9f0e;
         width: 100%;
+
+        &:hover {
+            // background-color: #5047DA;
+            // color : white;
+        }
         // max-width: 500px;
     }
 }
