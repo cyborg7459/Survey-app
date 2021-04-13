@@ -9,18 +9,29 @@ class SurveyPage extends React.Component {
 
     state = {
         isLoading : true,
-        survey : {}
+        surveyDetails : {},
+        surveyQuestions : []
     }
 
     componentDidMount() {
         this.fetchSurvey(this.props.match.params.id);
+        this.setState({
+            surveyID : this.props.match.params.id
+        })
     }
 
     fetchSurvey =  async id => {
         const surveyRef = firestore.collection('surveys').doc(id);
         const surveySnapshot = await surveyRef.get();
+        const questionsRef = surveyRef.collection('questions');
+        const questionsSnapshot = await questionsRef.get();
+        let questions = [];
+        questionsSnapshot.docs.map(question => {
+            questions.push(question.id);
+        })
         this.setState({
-            survey : surveySnapshot.data(),
+            surveyDetails : surveySnapshot.data(),
+            surveyQuestions : questions,
             isLoading : false
         })
     }
@@ -32,16 +43,7 @@ class SurveyPage extends React.Component {
                     this.state.isLoading ? <Loader text = 'Preparing the survey' /> : null
                 }
                 <div className="survey-page-inner">
-                    <div className="size28 d-flex align-items-center main-heading">{this.state.survey.title} | <span className='ml-4 size13'>by {this.state.survey.byUser}</span></div>
-                    {
-                        this.state.survey.questions ? 
-                            this.state.survey.questions.map(question => {
-                                return (
-                                    <h1>{question.statement}</h1>
-                                )
-                            })
-                        : null
-                    }
+                    <div className="size28 d-flex align-items-center main-heading">{this.state.surveyDetails.title} | <span className='ml-4 size13'>by {this.state.surveyDetails.byUser}</span></div>
                 </div>
             </div>
         )
