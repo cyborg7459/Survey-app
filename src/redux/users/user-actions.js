@@ -8,3 +8,8 @@ export const setUser = user => ({
 export const logUserOut = () => ({
     type: UserActionTypes.LOG_OUT
 })
+
+export const addFilledSurvey = id => ({
+    type : UserActionTypes.ADD_FILLED_SURVEY,
+    payload : id
+})

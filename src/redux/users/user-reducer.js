@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils';
 import UserActionTypes from './user-types';
 
 const INITIAL_STATE = {
@@ -15,6 +16,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 currentUser : null
+            }
+        case UserActionTypes.ADD_FILLED_SURVEY:
+            return {
+                ...state,
+                currentUser : {
+                    ...state.currentUser,
+                    surveysFilled : [...state.currentUser.surveysFilled, action.payload]
+                }
             }
         default:
             return state
