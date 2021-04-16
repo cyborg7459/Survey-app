@@ -89,6 +89,7 @@ class SurveyPage extends React.Component {
                                 )
                             })
                         }
+                        <button className='btn btn-block size14'>Submit Response</button>
                     </div>
                 </div>
             )
