@@ -22,7 +22,7 @@ class Main extends React.Component {
         const surveyRef = firestore.collection('surveys');
         surveyRef.onSnapshot(snapshot => {
             let surveys = [];
-            snapshot.docs.map(survey => {
+            snapshot.docs.forEach(survey => {
                 let surveyData = {id : survey.id, ...survey.data()}
                 surveys.push(surveyData);
             })

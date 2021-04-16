@@ -11,7 +11,8 @@ class SurveyPage extends React.Component {
     state = {
         isLoading : true,
         loaderText : 'Preparing the survey',
-        surveyDetails : {}
+        surveyDetails : {},
+        surveyResponses : {}
     }
 
     componentDidMount() {
@@ -19,6 +20,14 @@ class SurveyPage extends React.Component {
         this.setState({
             surveyID : this.props.match.params.id
         })
+    }
+
+    setSurveyResponse = (questionID, answerID) => {
+        let surveyResponses = this.state.surveyResponses;
+        surveyResponses[questionID] = answerID;
+        this.setState({
+            surveyResponses
+        });
     }
 
     fetchSurvey =  async id => {
@@ -47,7 +56,7 @@ class SurveyPage extends React.Component {
             const optionsRef = questionsRef.doc(question.id).collection('options');
             const optionsSnapshot = await optionsRef.get();
             let options = [];
-            optionsSnapshot.docs.map(option => {
+            optionsSnapshot.docs.forEach(option => {
                 const optionDetails = option.data();
                 optionDetails.id = option.id;
                 options.push(optionDetails);
@@ -76,7 +85,7 @@ class SurveyPage extends React.Component {
                         {
                             this.state.surveyQuestions.map(surveyQuestion => {
                                 return (
-                                    <QuestionCard key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
+                                    <QuestionCard setSurveyResponse = {this.setSurveyResponse} key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
                                 )
                             })
                         }

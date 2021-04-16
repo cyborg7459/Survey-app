@@ -3,6 +3,22 @@ import React from 'react';
 import './question-card-style.scss';
 
 class QuestionCard extends React.Component {
+
+    sendResponseToState = e => {
+        this.selectOption(e);
+        const questionID = this.props.question.id;
+        const optionID = e.target.id;
+        this.props.setSurveyResponse(questionID, optionID);
+    }
+
+    selectOption = (e) => {
+        let options = document.querySelectorAll(`.option-${this.props.question.id}`);
+        options.forEach(option => {
+            option.classList.remove('selected');
+        })
+        e.target.classList.add('selected');
+    }
+
     render() {
         return (
             <div className="question-card">
@@ -10,7 +26,9 @@ class QuestionCard extends React.Component {
                 {
                     this.props.question.options.map(option => {
                         return (
-                            <div className="size13 btn option" key={option.id} id = {option.id}>
+                            <div onClick={(e) => {
+                                this.sendResponseToState(e)
+                            }} className={`size13 btn option option-${this.props.question.id}`} key={option.id} id = {option.id}>
                                 {option.optionVal}
                             </div>
                         )
