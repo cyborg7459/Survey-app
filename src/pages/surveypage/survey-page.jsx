@@ -67,7 +67,7 @@ class SurveyPage extends React.Component {
         return questionsArray;
     }
 
-    handleFormSubmit = () => {
+    handleFormSubmit = async() => {
         const surveyResponses = this.state.surveyResponses;
         const len1 = Object.values(surveyResponses).length;
         const len2 = Object.values(this.state.surveyQuestions).length;
@@ -75,18 +75,23 @@ class SurveyPage extends React.Component {
             return alert("Kindly respond to all questions in the survey");
         const questions = Object.keys(surveyResponses);
         const responses = Object.values(surveyResponses);
+        this.setState({
+            loaderText : 'Submitting response, please wait',
+            isLoading : true
+        })
         for(let i = 0; i < questions.length; i++) {
             const qID = questions[i];
             const rID = responses[i];
-            this.updateDatabase(qID, rID);
+            await this.updateDatabase(qID, rID);
         }
+        this.props.history.push(`${this.props.match.url}/results`);
     }
 
     updateDatabase = async (qID, rID) => {
         const optionRef = firestore.collection('surveys').doc(this.state.surveyID).collection('questions').doc(qID).collection('options').doc(rID);
         const optionSnap = await optionRef.get();
         const cur_val = optionSnap.data().votes;
-        optionRef.update({votes : cur_val+1});
+        await optionRef.update({votes : cur_val+1});
     }
 
     render() {
