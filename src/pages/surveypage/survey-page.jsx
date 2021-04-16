@@ -1,10 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './survey-styles.scss';
 import Loader from '../../components/loader/loader.component';
 import { firestore } from '../../firebase/firebase.utils';
 import QuestionCard from '../question-card/question-card-component';
+import { addFilledSurvey } from '../../redux/users/user-actions';
 
 class SurveyPage extends React.Component {
 
@@ -83,7 +85,8 @@ class SurveyPage extends React.Component {
             const qID = questions[i];
             const rID = responses[i];
             await this.updateDatabase(qID, rID);
-        }
+        } 
+        await this.updateUser();
         this.props.history.push(`${this.props.match.url}/results`);
     }
 
@@ -92,6 +95,16 @@ class SurveyPage extends React.Component {
         const optionSnap = await optionRef.get();
         const cur_val = optionSnap.data().votes;
         await optionRef.update({votes : cur_val+1});
+    }
+
+    updateUser = async () => {
+        this.props.addFilledSurveyToUser(this.state.surveyID);
+        const userRef = firestore.collection('users').doc(this.props.user.currentUser.id);
+        const userSnap = await userRef.get();
+        const userData = userSnap.data();
+        await userRef.update({
+            surveysFilled: [...userData.surveysFilled, this.state.surveyID]
+        })
     }
 
     render() {
@@ -125,4 +138,12 @@ class SurveyPage extends React.Component {
     }
 }
 
-export default withRouter(SurveyPage);
+const mapStateToProps = state => ({
+    user : state.users
+})
+
+const mapDispatchToProps = disatch => ({
+    addFilledSurveyToUser : id => disatch(addFilledSurvey(id))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SurveyPage));

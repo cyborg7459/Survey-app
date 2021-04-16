@@ -53,6 +53,7 @@ class RegisterPage extends React.Component {
         try {
             const userRef = firestore.collection('users');
             const userToAdd = userRef.doc();
+            user.id = userToAdd.id;
             userToAdd.set(user);
             this.setState({
                 isLoading : false
