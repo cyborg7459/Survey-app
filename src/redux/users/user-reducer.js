@@ -1,4 +1,3 @@
-import { act } from 'react-dom/test-utils';
 import UserActionTypes from './user-types';
 
 const INITIAL_STATE = {
