@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import Loader from '../../components/loader/loader.component';
 import { firestore } from '../../firebase/firebase.utils';
-import QuestionCard from '../question-card/question-card-component';
+import QuestionCard from '../../components/question-card/question-card-component';
 import { addFilledSurvey } from '../../redux/users/user-actions';
 
 class SurveyPage extends React.Component {
