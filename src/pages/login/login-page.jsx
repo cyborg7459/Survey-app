@@ -3,7 +3,6 @@ import {  withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import validator from 'email-validator';
 
-import './login-style.scss';
 import Loader from '../../components/loader/loader.component';
 import { auth, firestore } from '../../firebase/firebase.utils';
 import { setUser } from '../../redux/users/user-actions';
@@ -50,11 +49,11 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="loginpage">
+            <div className="align-items-center page-container loginpage">
                 {
                     this.state.isLoading ? <Loader text = "Logging you in" /> : null
                 }
-                <div className="login-form">
+                <div className="form">
                     <h3>Sign in to your account</h3>
                     <p>Get access to all the surveys and questionnaires available</p>
                     <input className='input' type="text" placeholder="Enter email ID" id="email"/>

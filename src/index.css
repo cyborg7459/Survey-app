@@ -44,3 +44,23 @@ body {
 .input:focus {
   outline: none;
 }
+
+.page-container {
+  min-height: 100vh;
+  padding-top: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.page-inner {
+  width: 90%;
+  max-width: 1200px;
+}
+
+.form {
+  width: 500px;
+  background: #fff;
+  padding: 40px 45px;
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.14);
+  border-radius: 35px;
+}

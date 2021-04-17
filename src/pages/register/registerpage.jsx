@@ -71,11 +71,11 @@ class RegisterPage extends React.Component {
 
     render() {
         return (
-            <div className="loginpage">
+            <div className="align-items-center page-container">
                 {
                     this.state.isLoading ? <Loader text="Signing you up"/> : null
                 }
-                <div className="login-form">
+                <div className="form">
                     <h3>Welcome !!!</h3>
                     <p>Create an account with us and get started</p>
                     <input id="name" className='input' type="text" placeholder="Enter your name"/>

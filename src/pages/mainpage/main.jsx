@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import './main-styles.scss';
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
 import SurveyCard from '../../components/survey-card/survey-card-component';
@@ -35,11 +34,11 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div className="main-page-container">
+            <div className="page-container">
                 {
                     this.state.isLoading ? <Loader text='Fetching surveys'/> : null
                 }
-                <div className="main-page-inner">
+                <div className="page-inner">
                     <h1 className='mb-5 main-heading'>Active surveys</h1>
                     <Row className="surveys-container">
                         {
