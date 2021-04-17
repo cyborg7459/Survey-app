@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
 
-import './survey-styles.scss';
 import Loader from '../../components/loader/loader.component';
 import { firestore } from '../../firebase/firebase.utils';
 import QuestionCard from '../question-card/question-card-component';
@@ -119,16 +119,20 @@ class SurveyPage extends React.Component {
         }
         else {
             return (
-                <div className="survey-page-container">
-                    <div className="survey-page-inner">
+                <div className="page-container">
+                    <div className="page-inner">
                         <div className="size28 d-flex align-items-center main-heading">{this.state.surveyDetails.title} | <span className='ml-4 size13'>by {this.state.surveyDetails.byUser}</span></div>
-                        {
-                            this.state.surveyQuestions.map(surveyQuestion => {
-                                return (
-                                    <QuestionCard setSurveyResponse = {this.setSurveyResponse} key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
-                                )
-                            })
-                        }
+                        <Row>
+                            {
+                                this.state.surveyQuestions.map(surveyQuestion => {
+                                    return (
+                                        <Col lg = {6}>
+                                            <QuestionCard setSurveyResponse = {this.setSurveyResponse} key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
+                                        </Col> 
+                                    )
+                                })
+                            }
+                        </Row>              
                         <button onClick = {this.handleFormSubmit} className='btn btn-block size14'>Submit Response</button>
                     </div>
                 </div>
