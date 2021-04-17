@@ -10,6 +10,7 @@ import RegisterPage from './pages/register/registerpage';
 import Main from './pages/mainpage/main';
 import SurveyPage from './pages/surveypage/survey-page';
 import ResultPage from './pages/result-page/resultpage';
+import NewSurveyPage from './pages/newsurveypage/new-survey-page';
 
 class App extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class App extends React.Component {
           <Route exact path='/login' render = {() => !this.props.user.currentUser ? (<LoginPage/>) : (<Redirect to='/surveys'/>)} />
           <Route exact path='/register' render = {() => !this.props.user.currentUser ? (<RegisterPage/>) : (<Redirect to='/surveys'/>)} />
           <Route exact path = '/surveys' render = {() => this.props.user.currentUser ? (<Main/>) : (<Redirect to='/'/>)} />
+          <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/'/>)} />
           <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/'/>)} />
           <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/'/>)} />
         </Switch>

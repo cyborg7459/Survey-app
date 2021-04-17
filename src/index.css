@@ -41,6 +41,10 @@ body {
   border-bottom: 1px solid #cfcccc;
 }
 
+.input-borderless {
+  border-bottom: none;
+}
+
 .input:focus {
   outline: none;
 }
