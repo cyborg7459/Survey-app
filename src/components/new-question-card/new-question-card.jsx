@@ -5,7 +5,8 @@ import './new-question-card-styles.scss';
 class NewQuestionCard extends React.Component {
 
     state = {
-        optCount : 2
+        optCount : 2,
+        isFormReadOnly : false
     }
 
     
@@ -33,7 +34,16 @@ class NewQuestionCard extends React.Component {
             title : questionTitle,
             options : optionsArray
         }
-        console.log(question);
+        this.renderFormReadonly();
+        this.props.addQuestionToState(question);
+    }
+
+    renderFormReadonly = () => {
+        document.querySelector(`#${this.props.cardID} .btn`).remove();
+        document.querySelector(`#${this.props.cardID}`).firstChild.nextSibling.remove();
+        this.setState({
+            isFormReadOnly : true
+        })
     }
 
     render() {
@@ -41,22 +51,41 @@ class NewQuestionCard extends React.Component {
         let optionsGroup = [];
         for(let i = 1; i <= this.state.optCount; i++) {
             optionsGroup.push(
-                <input className='input option' placeholder={`Enter option ${i}`}/>
+                <input 
+                    readOnly={this.state.isFormReadOnly} 
+                    className={`${this.state.isFormReadOnly ? `opt-final` : null} input option`} 
+                    placeholder={`Enter option ${i}`}
+                />
             )
         }
 
         return (
             <div id={this.props.cardID} className="new-question-card">
-                <input className='input input-borderless size19' type="text" placeholder="Type your question here"/>
+                <input 
+                    readOnly={this.state.isFormReadOnly} 
+                    className='input my-0 input-borderless size19' 
+                    type="text" 
+                    placeholder="Type your question here"
+                />
                 <div className='d-flex align-items-center px-3'>
                     <label className='pt-2 mr-4 size12'>Select number of options : </label>
-                    <input min="2" id='opt-count' onChange={this.setOptCount} style={{width : "70px"}} type="number" className='input input-borderless' placeholder="Select number of options" defaultValue="2"/>
+                    <input 
+                        readOnly={this.state.isFormReadOnly} 
+                        min="2" 
+                        id='opt-count' 
+                        onChange={this.setOptCount} 
+                        style={{width : "70px"}} 
+                        type="number" 
+                        className='input input-borderless' 
+                        placeholder="Select number of options" 
+                        defaultValue="2"
+                    />
                 </div>
                 <div className="options-group">
                     {optionsGroup}
                 </div>
                 <div onClick={this.addQuestion} className='d-flex justify-content-end'>
-                    <button style={{width : "200px"}} className='mr-5 mt-5 mb-3 btn'>Add question</button>
+                    <button style={{width : "200px"}} className='mr-5 mt-4 mb-3 btn'>Add question</button>
                 </div>
             </div>
         )

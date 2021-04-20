@@ -25,7 +25,11 @@ class NewSurveyPage extends React.Component {
         const questionCards = [];
         for(let i = 0; i < this.state.questionCount; i++) {
             questionCards.push(
-                <NewQuestionCard key={i} cardID={`card-${i}`}/>
+                <NewQuestionCard 
+                    key={i} 
+                    cardID={`card-${i}`} 
+                    addQuestionToState = {this.addQuestionToState}
+                />
             )
         }
 
