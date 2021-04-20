@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
@@ -39,7 +40,12 @@ class Main extends React.Component {
                     this.state.isLoading ? <Loader text='Fetching surveys'/> : null
                 }
                 <div className="page-inner">
-                    <h1 className='mb-5 main-heading'>Active surveys</h1>
+                    <div className="mb-5 d-flex justify-content-between align-items-center">
+                        <h1 className='main-heading'>Active surveys</h1>
+                        <button onClick = {() => {
+                            this.props.history.push('/surveys/addnew')
+                        }} className='mb-4 btn'>Create your own survey</button>
+                    </div>
                     <Row className="surveys-container">
                         {
                             this.props.surveys.surveys.map(survey => {
@@ -65,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
     setSurveysToState : surveys => dispatch(setSurveys(surveys))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
