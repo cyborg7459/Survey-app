@@ -141,7 +141,7 @@ class SurveyPage extends React.Component {
                                 })
                             }
                         </Row>              
-                        <button onClick = {this.handleFormSubmit} className='btn btn-block size14'>Submit Response</button>
+                        <button style={{marginBottom : "100px"}} onClick = {this.handleFormSubmit} className='btn btn-block size14 mt-5'>Submit Response</button>
                     </div>
                 </div>
             )

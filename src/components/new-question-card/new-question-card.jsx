@@ -63,7 +63,7 @@ class NewQuestionCard extends React.Component {
             <div id={this.props.cardID} className="new-question-card">
                 <input 
                     readOnly={this.state.isFormReadOnly} 
-                    className='input my-0 input-borderless size19' 
+                    className='input my-0 input-borderless size17' 
                     type="text" 
                     placeholder="Type your question here"
                 />
