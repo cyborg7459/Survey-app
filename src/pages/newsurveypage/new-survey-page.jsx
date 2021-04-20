@@ -3,12 +3,14 @@ import NewQuestionCard from '../../components/new-question-card/new-question-car
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firestore } from '../../firebase/firebase.utils';
+import Loader from '../../components/loader/loader.component';
 
 class NewSurveyPage extends React.Component {
 
     state = {
         questionCount : 1,
-        questions : []
+        questions : [],
+        isLoading : false
     }
 
     addQuestionToState = question => {
@@ -33,6 +35,9 @@ class NewSurveyPage extends React.Component {
             return alert("Please add a description for the survey");
         else if(questions.length === 0)
             return alert("There must be at least one question in the survey"); 
+        this.setState({
+            isLoading : true
+        });
         const survey = {
             byUser : this.props.user.name,
             responses : 0,
@@ -40,6 +45,7 @@ class NewSurveyPage extends React.Component {
             description,
         }
         await this.generateSurveyInDatabase(survey, questions);
+        this.props.history.push('/');
     }
 
     generateSurveyInDatabase = async (survey, questions) => {
@@ -78,6 +84,9 @@ class NewSurveyPage extends React.Component {
 
         return (
             <div className="page-container">
+                {
+                    this.state.isLoading ? <Loader text = "Publishing your survey !!! Hang in tight" /> : null
+                }
                 <div className="page-inner">
                     <h1 className='main-heading'>Create your own survey</h1>
                     <h1 className='mb-5 size13'>Learn the world's views on topics that matter to you</h1>
@@ -122,4 +131,4 @@ const mapStateToProps = state => ({
     user : state.users.currentUser
 });
 
-export default connect(mapStateToProps)(NewSurveyPage);
+export default withRouter(connect(mapStateToProps)(NewSurveyPage));
