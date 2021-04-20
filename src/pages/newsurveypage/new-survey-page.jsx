@@ -1,5 +1,8 @@
 import React from 'react';
 import NewQuestionCard from '../../components/new-question-card/new-question-card';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { firestore } from '../../firebase/firebase.utils';
 
 class NewSurveyPage extends React.Component {
 
@@ -18,6 +21,46 @@ class NewSurveyPage extends React.Component {
         this.setState({
             questionCount : this.state.questionCount + 1
         });
+    }
+
+    handleFormSubmit = async () => { 
+        const title = document.getElementById('surveyName').value.trim();
+        const description = document.getElementById('surveyDesc').value.trim();
+        const questions = this.state.questions;
+        if(!title) 
+            return alert("Please enter a title for the survey");
+        else if(!description) 
+            return alert("Please add a description for the survey");
+        else if(questions.length === 0)
+            return alert("There must be at least one question in the survey"); 
+        const survey = {
+            byUser : this.props.user.name,
+            responses : 0,
+            title,
+            description,
+        }
+        await this.generateSurveyInDatabase(survey, questions);
+    }
+
+    generateSurveyInDatabase = async (survey, questions) => {
+        const surveyCollectionRef = firestore.collection('surveys');
+        const newSurveyRef = surveyCollectionRef.doc();
+        await newSurveyRef.set(survey);
+        const questionsRef = surveyCollectionRef.doc(newSurveyRef.id).collection('questions');
+        questions.forEach(async question => {
+            const newQuestionRef = questionsRef.doc();
+            await newQuestionRef.set({
+                title : question.title
+            });
+            const optionsRef = questionsRef.doc(newQuestionRef.id).collection('options');
+            question.options.forEach(async option => {
+                const newOptionRef = optionsRef.doc();
+                await newOptionRef.set({
+                    optionVal : option,
+                    votes : 0
+                })
+            })
+        })
     }
 
     render() {
@@ -68,11 +111,15 @@ class NewSurveyPage extends React.Component {
                     <h1 className='size20' style={{marginBottom : "-20px"}}>Survey Questions</h1>
                     {questionCards}
                     <button onClick={this.increaseQuestionCount} className='btn btn-block mt-5'>Add another question</button>
-                    <button className='mb-5 btn btn-block mt-3'>Publish survey</button>
+                    <button onClick={this.handleFormSubmit} className='mb-5 btn btn-block mt-3'>Publish survey</button>
                 </div>
             </div>
         )
     }
 }
 
-export default NewSurveyPage;
+const mapStateToProps = state => ({
+    user : state.users.currentUser
+});
+
+export default connect(mapStateToProps)(NewSurveyPage);
