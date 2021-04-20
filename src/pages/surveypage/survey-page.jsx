@@ -87,6 +87,7 @@ class SurveyPage extends React.Component {
             await this.updateDatabase(qID, rID);
         } 
         await this.updateUser();
+        await this.updateSurvey();
         this.props.history.push(`${this.props.match.url}/results`);
     }
 
@@ -105,6 +106,13 @@ class SurveyPage extends React.Component {
         await userRef.update({
             surveysFilled: [...userData.surveysFilled, this.state.surveyID]
         })
+    }
+
+    updateSurvey = async () => {
+        const surveyRef = firestore.collection('surveys').doc(this.state.surveyID);
+        const surveySnap = await surveyRef.get();
+        const cur_resp = surveySnap.data().responses;
+        await surveyRef.update({responses : cur_resp + 1});
     }
 
     render() {
