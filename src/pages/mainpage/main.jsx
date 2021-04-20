@@ -18,7 +18,7 @@ class Main extends React.Component {
     }
 
     getSurveys = async () => {
-        const surveyRef = firestore.collection('surveys');
+        const surveyRef = firestore.collection('surveys').orderBy('responses', 'desc');
         surveyRef.onSnapshot(snapshot => {
             let surveys = [];
             snapshot.docs.forEach(survey => {
