@@ -24,6 +24,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     surveysFilled : [...state.currentUser.surveysFilled, action.payload]
                 }
             }
+        case UserActionTypes.ADD_OWNED_SURVEY: 
+            return {
+                ...state,
+                currentUser : {
+                    ...state.currentUser,
+                    surveysOwned : [...state.currentUser.surveysOwned, action.payload]
+                }
+            }
         default:
             return state
     }

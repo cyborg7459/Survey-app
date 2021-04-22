@@ -13,3 +13,8 @@ export const addFilledSurvey = id => ({
     type : UserActionTypes.ADD_FILLED_SURVEY,
     payload : id
 })
+
+export const addOwnedSurvey = id => ({
+    type : UserActionTypes.ADD_OWNED_SURVEY,
+    payload : id
+})

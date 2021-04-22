@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firestore } from '../../firebase/firebase.utils';
 import Loader from '../../components/loader/loader.component';
+import { addOwnedSurvey } from '../../redux/users/user-actions';
 
 class NewSurveyPage extends React.Component {
 
@@ -66,6 +67,17 @@ class NewSurveyPage extends React.Component {
                     votes : 0
                 })
             })
+        })
+        await this.updateUser(newSurveyRef.id);
+    }
+
+    updateUser = async (surveyID) => {
+        this.props.addOwnedSurvey(surveyID);
+        const userRef = firestore.collection('users').doc(this.props.user.id);
+        const userSnap = await userRef.get();
+        const userData = userSnap.data();
+        await userRef.update({
+            surveysOwned: [...userData.surveysOwned, surveyID]
         })
     }
 
@@ -131,4 +143,8 @@ const mapStateToProps = state => ({
     user : state.users.currentUser
 });
 
-export default withRouter(connect(mapStateToProps)(NewSurveyPage));
+const mapDispatchToProps = dispatch => ({
+    addOwnedSurvey : id => dispatch(addOwnedSurvey(id))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewSurveyPage));
