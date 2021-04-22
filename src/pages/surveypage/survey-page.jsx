@@ -18,6 +18,17 @@ class SurveyPage extends React.Component {
     }
 
     componentDidMount() {
+        const surveyID = this.props.match.params.id;
+        const isSurveyFilled = this.props.user.currentUser.surveysFilled.includes(surveyID);
+        const isSurveyOwned = this.props.user.currentUser.surveysOwned.includes(surveyID);
+        if(isSurveyFilled) {
+            alert("You have already filled this survey");
+            this.props.history.push(`${this.props.match.url}/results`);
+        }
+        if(isSurveyOwned) {
+            alert("You own this survey");
+            this.props.history.push(`${this.props.match.url}/results`);
+        }
         this.fetchSurvey(this.props.match.params.id);
         this.setState({
             surveyID : this.props.match.params.id
@@ -134,7 +145,7 @@ class SurveyPage extends React.Component {
                             {
                                 this.state.surveyQuestions.map(surveyQuestion => {
                                     return (
-                                        <Col lg = {6}>
+                                        <Col key = {surveyQuestion.id} lg = {6}>
                                             <QuestionCard setSurveyResponse = {this.setSurveyResponse} key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
                                         </Col> 
                                     )
