@@ -1,4 +1,5 @@
 import React from 'react';
+import ResultCard from '../../components/result-card/result-card';
 
 class ResultPage extends React.Component {
 
@@ -50,6 +51,14 @@ class ResultPage extends React.Component {
             <div className="page-container">
                 <div className="page-inner">
                     <h1>This is the results page</h1>
+                    {
+                        this.state.data.map((dataPoint,idx) => {
+                            console.log("HEllo");
+                            return (
+                                <ResultCard key={idx} data={dataPoint}/>
+                            )
+                        })
+                    }
                 </div>
             </div>
         )
