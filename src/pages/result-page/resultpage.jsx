@@ -1,68 +1,82 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import ResultCard from '../../components/result-card/result-card';
+import Loader from '../../components/loader/loader.component';
+import { firestore } from '../../firebase/firebase.utils';
 
 class ResultPage extends React.Component {
 
     state = {
-        data: [
-            {
-                question : 'Who is the best player of all times',
-                options : [
-                    {
-                        value : "Messi",
-                        votes : 189
-                    },
-                    {
-                        value : "Ronaldo",
-                        votes : 132
-                    },
-                    {
-                        value : "Maradona",
-                        votes : 109
-                    },
-                    {
-                        value : "Pele",
-                        votes : 175
-                    }
-                ]
-            },
-            {
-                question : "Who is the best striker in the world",
-                options : [
-                    {
-                        value : "Lewandowski",
-                        votes : 555
-                    },
-                    {
-                        value : "Harry Kane",
-                        votes : 653
-                    },
-                    {
-                        value : "Aubameyang",
-                        votes : 122
-                    }
-                ]
-            }
-        ]
+        isLoading : true,
+        data : []
+    }
+
+    async componentDidMount() {
+        const surveyData = await this.getSurveyData();
+        this.setState({
+            data : surveyData
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                isLoading : false
+            }) }, 500);
+        });
+    }
+
+    getSurveyData = async () => {
+        const surveyID = this.props.match.params.id;
+        const surveyRef = firestore.collection('surveys').doc(surveyID);
+        const surveySnap = await surveyRef.get();
+        if(!surveySnap.exists) {
+            return alert('Could not find survey');
+        }
+        const questionsRef = surveyRef.collection('questions');
+        let questions = [];
+        const questionsSnap = await questionsRef.get();
+        questionsSnap.docs.map(async question => {
+            let curQuestion = {};
+            curQuestion.title = question.data().title;
+            const optionsSnap = await questionsRef.doc(question.id).collection('options').get();
+            let options = [];
+            optionsSnap.docs.map(option => {
+                options.push(option.data());
+            })
+            curQuestion.options = options;
+            questions.push(curQuestion);
+        })
+        let data = surveySnap.data();
+        data.questions = questions;
+        return data;
     }
 
     render() {
-        return (
-            <div className="page-container">
-                <div className="page-inner">
-                    <h1>This is the results page</h1>
-                    {
-                        this.state.data.map((dataPoint,idx) => {
-                            console.log("HEllo");
-                            return (
-                                <ResultCard key={idx} data={dataPoint}/>
-                            )
-                        })
-                    }
+        
+        if(this.state.isLoading) {
+            return (
+                <Loader text = "Fetching survey results"/>
+            )
+        }
+
+        else {
+            return (
+                <div className="page-container">
+                    <div className="page-inner">
+                        <h1>This is the results page</h1>
+                        {
+                            this.state.data.questions.map((dataPoint,idx) => {
+                                console.log("HEllo");
+                                return (
+                                    <ResultCard key={idx} data={dataPoint}/>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        
     }
 }
 
-export default ResultPage;
+export default withRouter(ResultPage);

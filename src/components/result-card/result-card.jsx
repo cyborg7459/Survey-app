@@ -8,8 +8,7 @@ class ResultCard extends React.Component {
     render() {
 
         const dataValues = this.props.data.options.map(dataPoint => dataPoint.votes);
-        const dataLabels = this.props.data.options.map(dataPoint => dataPoint.value);
-        console.log(dataLabels);
+        const dataLabels = this.props.data.options.map(dataPoint => dataPoint.optionVal);
 
         const data = {
             labels: dataLabels,
@@ -25,7 +24,7 @@ class ResultCard extends React.Component {
                 ],
                 borderWidth: 0,
                 hoverBackgroundColor : 'black',
-                hoverOffset : 10,
+                hoverOffset : 12,
                 offset : 0,
                 rotation : 0,
                 animation : {
@@ -39,7 +38,7 @@ class ResultCard extends React.Component {
         return (
             <div className="result-card">
                 <div className="card-inner">
-                    <h1 className='size18'>{this.props.data.question}</h1>
+                    <h1 className='size18 mb-4 text-center'>{this.props.data.title}</h1>
                     <div className="chart-container">
                         <Doughnut options={{
                             animations : {
