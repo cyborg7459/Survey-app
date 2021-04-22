@@ -59,6 +59,7 @@ body {
 .page-inner {
   width: 90%;
   max-width: 1200px;
+  margin-bottom: 100px;
 }
 
 .form {

@@ -85,7 +85,7 @@ class NewQuestionCard extends React.Component {
                     {optionsGroup}
                 </div>
                 <div onClick={this.addQuestion} className='d-flex justify-content-end'>
-                    <button style={{width : "200px"}} className='mr-5 mt-4 mb-3 btn'>Add question</button>
+                    <button style={{width : "200px", backgroundColor : "black"}} className='mr-5 mt-4 mb-3 btn'>Add question</button>
                 </div>
             </div>
         )
