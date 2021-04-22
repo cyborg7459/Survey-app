@@ -11,13 +11,13 @@
   import 'firebase/auth';
 
   const firebaseConfig = {
-      apiKey: "AIzaSyAT3ucUhVw2cKbgTu9Zp_kv0q2E8WZKtRY",
-      authDomain: "opinion-poll-8604c.firebaseapp.com",
-      projectId: "opinion-poll-8604c",
-      storageBucket: "opinion-poll-8604c.appspot.com",
-      messagingSenderId: "1058779521374",
-      appId: "1:1058779521374:web:40f8ac5d519856f5b8efcf",
-      measurementId: "G-VSN4FCJGND"
+      apiKey: (your api key),
+      authDomain: (your auth domain),
+      projectId: (your project ID),
+      storageBucket: (your storage bucket),
+      messagingSenderId: (your messagingsenderID),
+      appId: (your app ID),
+      measurementId: (your measurement ID)
   };
 
   firebase.initializeApp(firebaseConfig);
