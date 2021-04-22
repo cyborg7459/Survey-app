@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import Loader from '../../components/loader/loader.component';
 import { firestore } from '../../firebase/firebase.utils';
-import QuestionCard from '../../components/question-card/question-card-component';
+import QuestionCard from '../../components/questioncard/question-card-component';
 import { addFilledSurvey } from '../../redux/users/user-actions';
 
 class SurveyPage extends React.Component {
@@ -53,12 +53,15 @@ class SurveyPage extends React.Component {
             loaderText : 'Fetching questions'
         })
         const questions = this.buildQuestionsArray(questionsRef , questionsSnapshot.docs);
-        setTimeout(() => {
-            this.setState({
-                surveyQuestions : questions,
-                isLoading : false
-            })
-        }, 1000)
+        this.setState({
+            surveyQuestions : questions
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    isLoading : false
+                })
+            }, 1000);
+        })
     }
 
     buildQuestionsArray = (questionsRef, questions) => {

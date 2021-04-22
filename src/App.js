@@ -9,7 +9,7 @@ import LoginPage from './pages/login/login-page';
 import RegisterPage from './pages/register/registerpage';
 import Main from './pages/mainpage/main';
 import SurveyPage from './pages/surveypage/survey-page';
-import ResultPage from './pages/result-page/resultpage';
+import ResultPage from './pages/resultpage/resultpage';
 import NewSurveyPage from './pages/newsurveypage/new-survey-page';
 
 class App extends React.Component {

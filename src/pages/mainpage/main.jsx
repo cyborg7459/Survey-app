@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
-import SurveyCard from '../../components/survey-card/survey-card-component';
+import SurveyCard from '../../components/surveycard/survey-card-component';
 import { setSurveys } from '../../redux/surveys/surveys-actions';
 
 class Main extends React.Component {

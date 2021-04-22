@@ -1,5 +1,5 @@
 import React from 'react';
-import NewQuestionCard from '../../components/new-question-card/new-question-card';
+import NewQuestionCard from '../../components/newquestioncard/new-question-card';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firestore } from '../../firebase/firebase.utils';
