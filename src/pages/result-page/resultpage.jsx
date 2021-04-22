@@ -62,7 +62,9 @@ class ResultPage extends React.Component {
             return (
                 <div className="page-container">
                     <div className="page-inner">
-                        <h1>This is the results page</h1>
+                        <h1 className='main-heading'>Results | {this.state.data.title}</h1>
+                        <h5 className='text-muted'>by {this.state.data.byUser}</h5>
+                        <h5>{this.state.data.responses} people filled this survey</h5>
                         {
                             this.state.data.questions.map((dataPoint,idx) => {
                                 console.log("HEllo");
