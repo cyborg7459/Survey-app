@@ -46,6 +46,9 @@ class SurveyPage extends React.Component {
     fetchSurvey =  async id => {
         const surveyRef = firestore.collection('surveys').doc(id);
         const surveySnapshot = await surveyRef.get();
+        if(!surveySnapshot.exists) {
+            return this.props.history.push('/error');
+        }
         const questionsRef = surveyRef.collection('questions');
         const questionsSnapshot = await questionsRef.get();
         this.setState({

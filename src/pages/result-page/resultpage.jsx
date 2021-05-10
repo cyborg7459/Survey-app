@@ -29,7 +29,7 @@ class ResultPage extends React.Component {
         const surveyRef = firestore.collection('surveys').doc(surveyID);
         const surveySnap = await surveyRef.get();
         if(!surveySnap.exists) {
-            return alert('Could not find survey');
+            return this.props.history.push('/error');
         }
         const questionsRef = surveyRef.collection('questions');
         let questions = [];
