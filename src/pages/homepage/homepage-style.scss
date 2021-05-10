@@ -1,24 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
 
 #homepage-container {
-    min-height: 100vh;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+
+    h1 {
+        font-family: 'Francois One', sans-serif;
+    }
+
+    .custom-shape-divider-bottom-1620380295 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+    }
+    
+    .custom-shape-divider-bottom-1620380295 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 144px;
+    }
+    
+    .custom-shape-divider-bottom-1620380295 .shape-fill {
+        fill: #FFFFFF;
+    }
 
     #homepage-inner {
-        width: 98%;
-        max-width: 1600px;
+        position: relative;
+        height: 100vh;
+        padding-left: 150px;
+        padding-top: 250px;
+    }
+    
+    #heading {
+        position: relative;
+        font-family: 'Archivo Black', sans-serif!important;
+    }
+    
+    #back-heading {
+        font-size: 8em;
+        color: rgba(255,255,255,0.35);
+        position: absolute;
+    }
+    
+    #front-heading {
+        font-size: 70px;
+        color: white;
+        position: absolute;
+        top: 90px;
+        left: 50px;
+        text-shadow: -4px 4px 7px rgba(0,0,0,0.07);
+    }
+    
+    #heading-text {
+        margin-top: 190px;
+        max-width: 800px;
+        margin-left: 10px;
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+    
+    #get-started-btn {
+        width: 350px;
+        padding: 12px;
+        margin-top: 20px;
+        background: rgba(255,255,255,1.0);
+        color: black;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.8s;
 
-        .text-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        &:hover {
+            background-color: #fff;
+            color: black;
+            /* transform: translateX(2px) translatey(2px); */
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.22);
+    
         }
     }
-
-    #coverImg {
-        height: 650px;
+    
+    #main-img {
+        position: absolute;
+        opacity: 0.90;
+        left: 1050px;
+        bottom: 250px;
     }
+   
+    
 }
