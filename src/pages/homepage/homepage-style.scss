@@ -2,10 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
 
 #homepage-container {
-    z-index: 1000;
-    position: absolute;
-    width: 100%;
-    height: 100vh;
     background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
 
     h1 {
@@ -82,7 +78,6 @@
         &:hover {
             background-color: #fff;
             color: black;
-            /* transform: translateX(2px) translatey(2px); */
             box-shadow: 4px 4px 10px rgba(0,0,0,0.22);
     
         }
