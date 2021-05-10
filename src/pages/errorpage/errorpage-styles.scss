@@ -16,7 +16,7 @@
         position: relative;
         display: block;
         width: calc(100% + 1.3px);
-        height: 150px;
+        height: 120px;
     }
     
     .custom-shape-divider-bottom-1620380295 .shape-fill {
@@ -29,7 +29,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 90%;
+        height: calc(100% - 120px);
 
         h1 {
             font-family: 'Francois One', sans-serif;
