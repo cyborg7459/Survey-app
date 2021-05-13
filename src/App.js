@@ -12,6 +12,7 @@ import SurveyPage from './pages/surveypage/survey-page';
 import ResultPage from './pages/resultpage/resultpage';
 import NewSurveyPage from './pages/newsurveypage/new-survey-page';
 import ErrorPage from './pages/errorpage/errorpage-component';
+import GoogleAuth from './pages/googleAuth/googleAuth.component';
 
 class App extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/login'/>)} />
           <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/login'/>)} />
           <Route exact path = '/error' component = {ErrorPage} />
+          <Route exact path='/googleauth' component ={GoogleAuth} />
           <Route component={ErrorPage}/>
         </Switch>
       </div>
