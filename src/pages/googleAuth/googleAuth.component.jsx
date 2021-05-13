@@ -8,24 +8,28 @@ import { setUser } from '../../redux/users/user-actions';
 
 class GoogleAuth extends React.Component {
 
-    register = () => {
-        firebase.auth().signInWithPopup(provider).then((res) => {
-            const user = {
-                email : res.user.email,
-                name : res.user.displayName,
-                uid : res.user.uid,
-                surveysFilled : [],
-                surveysOwned : []
+    googleAuth = async () => {
+        firebase.auth().signInWithPopup(provider).then(async (res) => {
+            const uid = res.user.uid;
+            const userRef = firestore.collection('users').where('uid', '==', uid);
+            const userSnap = await userRef.get();
+            if(!userSnap.empty) {
+                alert("Old user");
+                const user = userSnap.docs[0].data();
+                console.log(user);
+                this.props.setUser(user);
             }
-            this.addUserToDatabase(user);
-        }).catch(err => {
-            const errCode = err.code;
-            const msg = err.message;
-            const obj = {
-                status : errCode,
-                message : msg
+            else {
+                alert("New user");
+                const user = {
+                    email : res.user.email,
+                    name : res.user.displayName,
+                    uid : res.user.uid,
+                    surveysFilled : [],
+                    surveysOwned : []
+                }
+                this.addUserToDatabase(user);
             }
-            console.log(obj);
         })
     }
 
@@ -37,26 +41,10 @@ class GoogleAuth extends React.Component {
         this.props.setUser(user);
     }
 
-    // login = () => {
-    //     firebase.auth().signInWithPopup(provider).then((res) => {
-    //         const user = {
-
-    //         }
-    //     }).catch(err => {
-    //         const errCode = err.code;
-    //         const msg = err.message;
-    //         const obj = {
-    //             status : errCode,
-    //             message : msg
-    //         }
-    //         console.log(obj);
-    //     })
-    // }
-
     render() {
         return (
             <div className='pt-5'>
-                <button onClick={this.register} className='mt-5 btn ml-5'>Register with Google</button>
+                <button onClick={this.googleAuth} className='mt-5 btn ml-5'>Register with Google</button>
                 <button onClick={this.login} className='btn mt-5 ml-5'>Sign in with Google</button>
             </div>
         )

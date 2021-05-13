@@ -103,7 +103,7 @@ class NewSurveyPage extends React.Component {
                     <h1 className='main-heading'>Create your own survey</h1>
                     <h1 className='mb-5 size13'>Learn the world's views on topics that matter to you</h1>
                     <input 
-                        required = "true"
+                        required = {true}
                         type = "text"
                         id = "surveyName"
                         className = "input mb-5 size25 py-3 px-0"
@@ -115,7 +115,7 @@ class NewSurveyPage extends React.Component {
                     />
                     <h1 className='size20 mb-2'>Survey Description</h1>
                     <textarea 
-                        required = "true"
+                        required = {true}
                         id = "surveyDesc"
                         className = "input"
                         style = {{

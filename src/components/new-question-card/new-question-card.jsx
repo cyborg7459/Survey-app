@@ -52,6 +52,7 @@ class NewQuestionCard extends React.Component {
         for(let i = 1; i <= this.state.optCount; i++) {
             optionsGroup.push(
                 <input 
+                    key = {i}
                     readOnly={this.state.isFormReadOnly} 
                     className={`${this.state.isFormReadOnly ? `opt-final` : null} input option`} 
                     placeholder={`Enter option ${i}`}
