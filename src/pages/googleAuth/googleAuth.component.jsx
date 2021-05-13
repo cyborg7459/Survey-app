@@ -64,7 +64,7 @@ class GoogleAuth extends React.Component {
                     this.state.isLoading ? <Loader text='Signing you in'/> : null
                 }
                 <Row id='auth-inner'>
-                    <Col className='px-0' sm={6} lg={6} id='sidebar'>
+                    <Col className='px-0' sm={6} lg={7} id='sidebar'>
                         <div className="overlay">
                             <h1 className='size35'>A place to gather public opinion</h1>
                             <p className="lead">
@@ -77,7 +77,7 @@ class GoogleAuth extends React.Component {
                             }} className='btn'>Back to homepage</button>
                         </div>
                     </Col>
-                    <Col sm={6} lg={6} id='signin-form'>
+                    <Col sm={6} lg={5} id='signin-form'>
                         <img className='mb-5' src={loginImg} alt="login" />
                         <div onClick={this.googleAuth} className='size12' id="button"> 
                             <img src={googleIcon} alt="google-icon" />
