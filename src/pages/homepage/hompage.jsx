@@ -22,7 +22,7 @@ const Homepage = (...props) => {
                     Or create your own survey and share among your friends
                 </p>
                 <button onClick={() => {
-                    props[0].history.push('/login');
+                    props[0].history.push('/auth');
                 }} class="btn" id="get-started-btn">
                     Get started
                 </button>

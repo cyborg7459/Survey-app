@@ -1,26 +1,36 @@
 import React from 'react';
 import { withRouter } from "react-router";
 import { connect } from 'react-redux'; 
+import { Row, Col } from 'react-bootstrap';
 
+import './googleAuth-styles.scss';
 import { provider, firestore } from '../../firebase/firebase.utils';
 import firebase from '../../firebase/firebase.utils';
 import { setUser } from '../../redux/users/user-actions';
+import loginImg from '../../gallery/login.svg';
+import googleIcon from '../../gallery/google.png';
+import Loader from '../../components/loader/loader.component';
 
 class GoogleAuth extends React.Component {
 
+    state = {
+        isLoading : false
+    }
+
     googleAuth = async () => {
         firebase.auth().signInWithPopup(provider).then(async (res) => {
+            this.setState({
+                isLoading : true
+            })
             const uid = res.user.uid;
             const userRef = firestore.collection('users').where('uid', '==', uid);
             const userSnap = await userRef.get();
             if(!userSnap.empty) {
-                alert("Old user");
                 const user = userSnap.docs[0].data();
                 console.log(user);
                 this.props.setUser(user);
             }
             else {
-                alert("New user");
                 const user = {
                     email : res.user.email,
                     name : res.user.displayName,
@@ -30,6 +40,12 @@ class GoogleAuth extends React.Component {
                 }
                 this.addUserToDatabase(user);
             }
+            this.props.history.push('/');
+        }).catch(err => {
+            alert(err.message);
+            this.setState({
+                isLoading : false
+            })
         })
     }
 
@@ -43,9 +59,29 @@ class GoogleAuth extends React.Component {
 
     render() {
         return (
-            <div className='pt-5'>
-                <button onClick={this.googleAuth} className='mt-5 btn ml-5'>Register with Google</button>
-                <button onClick={this.login} className='btn mt-5 ml-5'>Sign in with Google</button>
+            <div className='full-screen'>
+                {
+                    this.state.isLoading ? <Loader text='Signing you in'/> : null
+                }
+                <Row id='auth-inner'>
+                    <Col className='px-0' sm={6} lg={6} id='sidebar'>
+                        <div className="overlay">
+                            <h1 className='size35'>A place to gather public opinion</h1>
+                            <p className="lead">
+                                "What's your opinion" provides you the perfect platform to create or take part in surveys about anything and everything.
+                                <br/> <br/>
+                                From sports to science, and from politics to entertainment, you've got it all.
+                            </p>
+                        </div>
+                    </Col>
+                    <Col sm={6} lg={6} id='signin-form'>
+                        <img className='mb-5' src={loginImg} alt="login" />
+                        <div onClick={this.googleAuth} className='size12' id="button"> 
+                            <img src={googleIcon} alt="google-icon" />
+                            Sign in with Google
+                        </div>
+                    </Col>
+                </Row>
             </div>
         )
     }

@@ -16,7 +16,7 @@
     }
 
     @media(max-width: 700px) {
-        padding : 0 20px;
+        padding : 0 20px!important;
     }
 
     .loader-content {
@@ -29,12 +29,12 @@
     .loader-circles-container {
         display : flex;
         align-self: center;
-        margin-left: 15px;
+        margin-left: 15px!important;
 
         @media(max-width : 700px) {
             justify-content: center;
-            margin-top : 20px;
-            margin-left : 0px;
+            margin-top : 20px!important;
+            margin-left : 0px!important;
         }
 
         .loader-circle {
@@ -42,7 +42,7 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            margin: 5px;
+            margin: 5px!important;
             animation: bounce 0.5s ease-in infinite;
 
             &:nth-of-type(2n){

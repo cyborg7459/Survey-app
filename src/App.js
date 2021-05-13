@@ -20,10 +20,10 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render = {() => !this.props.user.currentUser ? (<Homepage/>) : (<Redirect to='/surveys'/>)}/>
           <Route exact path='/auth' component ={GoogleAuth} />
-          <Route exact path = '/surveys' render = {() => this.props.user.currentUser ? (<Main/>) : (<Redirect to='/login'/>)} />
-          <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/login'/>)} />
-          <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/login'/>)} />
-          <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/login'/>)} />
+          <Route exact path = '/surveys' render = {() => this.props.user.currentUser ? (<Main/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/error' component = {ErrorPage} />
           <Route component={ErrorPage}/>
         </Switch>
