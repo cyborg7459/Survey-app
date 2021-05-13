@@ -70,8 +70,11 @@ class GoogleAuth extends React.Component {
                             <p className="lead">
                                 "What's your opinion" provides you the perfect platform to create or take part in surveys about anything and everything.
                                 <br/> <br/>
-                                From sports to science, and from politics to entertainment, you've got it all.
+                                From sports to science, and from politics to entertainment, you'll get it all here
                             </p>
+                            <button onClick={() => {
+                                this.props.history.push('/');
+                            }} className='btn'>Back to homepage</button>
                         </div>
                     </Col>
                     <Col sm={6} lg={6} id='signin-form'>
