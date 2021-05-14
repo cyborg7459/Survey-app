@@ -3,8 +3,15 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './survey-card-styles.scss';
+import { firestore } from '../../firebase/firebase.utils';
 
 class SurveyCard extends React.Component {
+
+    closeSurvey = async () => {
+        const surveyRef = firestore.collection('surveys').doc(this.props.id);
+        await surveyRef.update({archived : true});
+    }
+
     render() {
 
         const isFilled = this.props.user.surveysFilled.includes(this.props.id);
@@ -37,7 +44,7 @@ class SurveyCard extends React.Component {
                 }
                 {
                     isOwned ? 
-                    <div className='btn btn-block' style={{
+                    <div onClick={this.closeSurvey} className='btn btn-block' style={{
                         backgroundColor: "#a62c07",
                         padding: "7px 10px"
                     }}>
