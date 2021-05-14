@@ -7,12 +7,35 @@ import { firestore } from '../../firebase/firebase.utils';
 
 class SurveyCard extends React.Component {
 
-    closeSurvey = async () => {
+    toggleSurveyArchivedStatus = async () => {
         const surveyRef = firestore.collection('surveys').doc(this.props.id);
-        await surveyRef.update({archived : true});
+        const surveySnap = await surveyRef.get();
+        await surveyRef.update({archived : !surveySnap.data().archived});
     }
 
     render() {
+
+        let customButton;
+        if(this.props.match.path.split('/')[2] == 'archived') {
+            customButton = (
+                <div onClick={this.toggleSurveyArchivedStatus} className='btn btn-block' style={{
+                    backgroundColor: "green",
+                    padding: "7px 10px"
+                }}>
+                    Reopen survey
+                </div> 
+            )
+        }
+        else {
+            customButton = (
+                <div onClick={this.toggleSurveyArchivedStatus} className='btn btn-block' style={{
+                    backgroundColor: "#a62c07",
+                    padding: "7px 10px"
+                }}>
+                    Close survey
+                </div> 
+            )
+        }
 
         const isFilled = this.props.user.surveysFilled.includes(this.props.id);
         const isOwned = this.props.user.surveysOwned.includes(this.props.id);
@@ -43,14 +66,7 @@ class SurveyCard extends React.Component {
                         }} className="btn btn-block" style={{padding: "7px 10px"}}>Fill survey</div>
                 }
                 {
-                    isOwned ? 
-                    <div onClick={this.closeSurvey} className='btn btn-block' style={{
-                        backgroundColor: "#a62c07",
-                        padding: "7px 10px"
-                    }}>
-                        Close survey
-                    </div> 
-                    : null
+                    isOwned ? customButton : null
                 }
                 
             </div>
