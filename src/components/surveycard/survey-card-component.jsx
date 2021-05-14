@@ -29,11 +29,21 @@ class SurveyCard extends React.Component {
                     ? 
                         <div onClick = {() => {
                             this.props.history.push(`/survey/${this.props.id}/results`)
-                        }} style={{backgroundColor : "black"}} className="btn btn-block">View survey results</div>
+                        }} style={{backgroundColor : "black", padding: "7px 10px"}} className="btn btn-block">View survey results</div>
                     : 
                         <div onClick = {() => {
                             this.props.history.push(`/survey/${this.props.id}`)
-                        }} className="btn btn-block">Fill survey</div>
+                        }} className="btn btn-block" style={{padding: "7px 10px"}}>Fill survey</div>
+                }
+                {
+                    isOwned ? 
+                    <div className='btn btn-block' style={{
+                        backgroundColor: "#a62c07",
+                        padding: "7px 10px"
+                    }}>
+                        Close survey
+                    </div> 
+                    : null
                 }
                 
             </div>
