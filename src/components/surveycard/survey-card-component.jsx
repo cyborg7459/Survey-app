@@ -15,6 +15,9 @@ class SurveyCard extends React.Component {
 
     render() {
 
+        const isFilled = this.props.user.surveysFilled.includes(this.props.id);
+        const isOwned = this.props.user.surveysOwned.includes(this.props.id);
+
         let customButton;
         if(this.props.match.path.split('/')[2] == 'archived') {
             customButton = (
@@ -37,8 +40,21 @@ class SurveyCard extends React.Component {
             )
         }
 
-        const isFilled = this.props.user.surveysFilled.includes(this.props.id);
-        const isOwned = this.props.user.surveysOwned.includes(this.props.id);
+        let mainButton;
+        if(this.props.match.path.split('/')[2] == 'archived' || isFilled || isOwned) {
+            mainButton = (
+                <div onClick = {() => {
+                    this.props.history.push(`/survey/${this.props.id}/results`)
+                }} style={{backgroundColor : "black", padding: "7px 10px"}} className="btn btn-block">View survey results</div>
+            )
+        }
+        else {
+            mainButton = (
+                <div onClick = {() => {
+                    this.props.history.push(`/survey/${this.props.id}`)
+                }} className="btn btn-block" style={{padding: "7px 10px"}}>Fill survey</div>
+            )
+        }
 
         return (
             <div className="survey-card">
@@ -55,15 +71,7 @@ class SurveyCard extends React.Component {
                     isOwned ? <p className='text-muted size11'>You own this survey</p> : null
                 }
                 {
-                    (isFilled || isOwned) 
-                    ? 
-                        <div onClick = {() => {
-                            this.props.history.push(`/survey/${this.props.id}/results`)
-                        }} style={{backgroundColor : "black", padding: "7px 10px"}} className="btn btn-block">View survey results</div>
-                    : 
-                        <div onClick = {() => {
-                            this.props.history.push(`/survey/${this.props.id}`)
-                        }} className="btn btn-block" style={{padding: "7px 10px"}}>Fill survey</div>
+                    mainButton
                 }
                 {
                     isOwned ? customButton : null
