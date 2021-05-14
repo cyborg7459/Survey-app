@@ -19,7 +19,7 @@ class SurveyCard extends React.Component {
         const isOwned = this.props.user.surveysOwned.includes(this.props.id);
 
         let customButton;
-        if(this.props.match.path.split('/')[2] == 'archived') {
+        if(this.props.match.path.split('/')[2] === 'archived') {
             customButton = (
                 <div onClick={this.toggleSurveyArchivedStatus} className='btn btn-block' style={{
                     backgroundColor: "green",
@@ -41,7 +41,7 @@ class SurveyCard extends React.Component {
         }
 
         let mainButton;
-        if(this.props.match.path.split('/')[2] == 'archived' || isFilled || isOwned) {
+        if(this.props.match.path.split('/')[2] === 'archived' || isFilled || isOwned) {
             mainButton = (
                 <div onClick = {() => {
                     this.props.history.push(`/survey/${this.props.id}/results`)
