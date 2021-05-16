@@ -61,7 +61,7 @@ class SurveyCard extends React.Component {
             image = (<img src={science} alt="img" />); 
             topicName = "Science";
         }
-        else if(topic == "sports") {
+        else if(topic === "sports") {
             image = (<img src={sports} alt="img" />);
             topicName = "Sports";
         }
