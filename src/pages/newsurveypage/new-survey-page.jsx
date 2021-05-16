@@ -101,19 +101,35 @@ class NewSurveyPage extends React.Component {
                 }
                 <div className="page-inner">
                     <h1 className='main-heading'>Create your own survey</h1>
-                    <h1 className='mb-5 size13'>Learn the world's views on topics that matter to you</h1>
+                    <h1 className='mb-4 size14'>Learn the world's views on topics that matter to you</h1>
                     <input 
                         required = {true}
                         type = "text"
                         id = "surveyName"
-                        className = "input mb-5 size25 py-3 px-0"
+                        className = "input mb-1 size17 py-3 px-0"
                         placeholder = "Enter a title for your survey ..."
                         style = {{
                             backgroundColor : "#f9f9f9",
                             borderBottom : "none"
                         }}
                     />
-                    <h1 className='size20 mb-2'>Survey Description</h1>
+
+                    <select style={{backgroundColor: "#f9f9f9"}} className='input mb-5 px-0' name="survey-topic" id="survey-topic">
+                        <option className='text-muted' value={null}>Select a topic for the survey ...</option>
+                        <option value="sports">Sports</option>
+                        <option value="education">Education</option>
+                        <option value="politics">Politics</option>
+                        <option value="movies">Movies</option>
+                        <option value="business">Business</option>
+                        <option value="science">Science</option>
+                        <option value="curAffairs">Current Affairs</option>
+                        <option value="health">Health</option>
+                        <option value="music">Music</option>
+                        <option value="worldNews">World News</option>
+                        <option value="others">Other</option>
+                    </select>
+
+                    <h1 style={{fontWeight: "400"}} className='size13 mb-2'>Survey Description</h1>
                     <textarea 
                         required = {true}
                         id = "surveyDesc"
@@ -129,7 +145,8 @@ class NewSurveyPage extends React.Component {
                         rows="5" 
                         placeholder = "Give a short description about your survey"
                     />
-                    <h1 className='size20' style={{marginBottom : "-20px"}}>Survey Questions</h1>
+                    
+                    <h1  className='size13' style={{fontWeight: "400", marginBottom : "-20px"}}>Survey Questions</h1>
                     {questionCards}
                     <button onClick={this.increaseQuestionCount} className='btn btn-block mt-5'>Add another question</button>
                     <button onClick={this.handleFormSubmit} className='mb-5 btn btn-block mt-3'>Publish survey</button>

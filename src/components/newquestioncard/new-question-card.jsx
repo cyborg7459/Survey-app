@@ -63,12 +63,12 @@ class NewQuestionCard extends React.Component {
             <div id={this.props.cardID} className="new-question-card">
                 <input 
                     readOnly={this.state.isFormReadOnly} 
-                    className='input my-0 input-borderless size17' 
+                    className='input my-0 input-borderless size15' 
                     type="text" 
                     placeholder="Type your question here"
                 />
-                <div className='d-flex align-items-center px-3'>
-                    <label className='pt-2 mr-4 size12'>Select number of options : </label>
+                <div className='d-flex align-items-center px-2'>
+                    <label className='pt-2 mr-3 size10'>Select number of options : </label>
                     <input 
                         readOnly={this.state.isFormReadOnly} 
                         min="2" 
