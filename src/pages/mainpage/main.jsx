@@ -52,10 +52,10 @@ class Main extends React.Component {
                     </div>
                     <Row className="surveys-container">
                         {
-                            this.props.surveys.surveys.map(survey => {
+                            this.props.surveys.surveys.map((survey, idx) => {
                                 return (
-                                    <Col xl={4} md={6}>
-                                        <SurveyCard key={survey.id} id={survey.id} survey={survey}/>
+                                    <Col sm={12}>
+                                        <SurveyCard align={idx%2==0 ? 'right' : 'left'} key={survey.id} id={survey.id} survey={survey}/>
                                     </Col>
                                 )
                             })
