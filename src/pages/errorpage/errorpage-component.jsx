@@ -12,7 +12,7 @@ const ErrorPage = (...props) => {
                 </svg>
             </div>
             <div className="error-inner">
-                <img src={errorImg} className='mb-5'/>
+                <img alt="error" src={errorImg} className='mb-5'/>
                 <h1 className='text-center mx-5 mb-0'>OOPS !!! WE ARE UNABLE TO FIND WHAT YOU'RE LOOKING FOR</h1>
                 <button onClick = {() => {
                     props[0].history.push('/');
