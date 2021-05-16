@@ -30,8 +30,13 @@ class NewSurveyPage extends React.Component {
         const title = document.getElementById('surveyName').value.trim();
         const description = document.getElementById('surveyDesc').value.trim();
         const questions = this.state.questions;
+        const selectedIndex = document.getElementById('survey-topic').selectedIndex;
+        const selectedTopic = document.getElementById('survey-topic').options[selectedIndex].value;
+
         if(!title) 
             return alert("Please enter a title for the survey");
+        else if(selectedIndex === 0)
+            return alert("Please select a topic for the survey");
         else if(!description) 
             return alert("Please add a description for the survey");
         else if(questions.length === 0)
@@ -41,9 +46,12 @@ class NewSurveyPage extends React.Component {
         });
         const survey = {
             byUser : this.props.user.name,
+            ownerID : this.props.user.id,
             responses : 0,
+            archived : false,
             title,
             description,
+            topic : selectedTopic
         }
         await this.generateSurveyInDatabase(survey, questions);
         this.props.history.push('/');
