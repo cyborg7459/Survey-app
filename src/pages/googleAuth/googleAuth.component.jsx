@@ -63,21 +63,27 @@ class GoogleAuth extends React.Component {
                 {
                     this.state.isLoading ? <Loader text='Signing you in'/> : null
                 }
+                <div id="home-link" onClick={() => this.props.history.push('/')}>
+                    <i class="mr-3 fas fa-home"></i>
+                    Back to home
+                </div>
                 <Row id='auth-inner'>
-                    <Col className='px-0' sm={6} lg={7} id='sidebar'>
+                    <Col className='px-0' md={6} lg={7} id='sidebar'>
                         <div className="overlay">
+                            
                             <h1 className='size35'>A place to gather public opinion</h1>
                             <p className="lead">
-                                "What's your opinion" provides you the perfect platform to create or take part in surveys about anything and everything.
-                                <br/> <br/>
-                                From sports to science, and from politics to entertainment, you'll get it all here
+                                "What's your opinion" provides you the perfect platform to create or take part in surveys about anything and everything. From sports to science, and from politics to entertainment, you'll get it all here
+                                <br/>
+                                <br/>
+                                Witness easy-to-create surveys with a clean & beatiful graphical representation of the results.
                             </p>
-                            <button onClick={() => {
+                            {/* <button onClick={() => {
                                 this.props.history.push('/');
-                            }} className='btn'>Back to homepage</button>
+                            }} className='btn'>Back to homepage</button> */}
                         </div>
                     </Col>
-                    <Col sm={6} lg={5} id='signin-form'>
+                    <Col md={6} lg={5} id='signin-form'>
                         <img className='mb-5' src={loginImg} alt="login" />
                         <div onClick={this.googleAuth} className='size12' id="button"> 
                             <img src={googleIcon} alt="google-icon" />
