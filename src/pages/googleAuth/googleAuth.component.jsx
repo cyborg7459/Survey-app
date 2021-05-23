@@ -27,7 +27,6 @@ class GoogleAuth extends React.Component {
             const userSnap = await userRef.get();
             if(!userSnap.empty) {
                 const user = userSnap.docs[0].data();
-                console.log(user);
                 this.props.setUser(user);
             }
             else {
