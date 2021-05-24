@@ -27,51 +27,51 @@ class SurveyCard extends React.Component {
 
     render() {
 
-        let image, topicName;
-        const topic = this.props.survey.topic;
-        if(topic === "business") {
-            image = (<img src={business} alt="img" />);
-            topicName = "Business";
-        }
-        else if(topic === "curAffairs") {
-            image = (<img src={curAffairs} alt="img" />); 
-            topicName = "Current Affairs";  
-        }
-        else if(topic === "education") {
-            image = (<img src={education} alt="img" />);
-            topicName = "Education";
-        }
-        else if(topic === "health") {
-            image = (<img src={health} alt="img" />);  
-            topicName = "Health";
-        }
-        else if(topic === "movies") {
-            image = (<img src={movies} alt="img" />);
-            topicName = "Movies";
-        }
-        else if(topic === "music") {
-            image = (<img src={music} alt="img" />);  
-            topicName = "Music"; 
-        }
-        else if(topic === "politics") {
-            image = (<img src={politics} alt="img" />);
-            topicName = "Politics";
-        }
-        else if(topic === "science") {
-            image = (<img src={science} alt="img" />); 
-            topicName = "Science";
-        }
-        else if(topic === "sports") {
-            image = (<img src={sports} alt="img" />);
-            topicName = "Sports";
-        }
-        else if(topic === "worldNews") {
-            image = (<img src={worldNews} alt="img" />);   
-            topicName = "World News"; 
-        }
-        else {
-            image = (<img src={others} alt="img" />);
-            topicName = "Miscellaneous";
+        const cardDetails = {
+            "business" : {
+                image : business,
+                topicName : "Business"
+            },
+            "curAffairs" : {
+                image : curAffairs,
+                topicName : "Current Affairs"
+            },
+            "education" : {
+                image : education,
+                topicName : "Education"
+            },
+            "health" : {
+                image : health,
+                topicName : "Health"
+            },
+            "movies" : {
+                image : movies,
+                topicName : "Movies"
+            },
+            "music" : {
+                image : music,
+                topicName : "Music"
+            },
+            "politics" : {
+                image : politics,
+                topicName : "Politics"
+            },
+            "science" : {
+                image : science,
+                topicName : "Science"
+            },
+            "sports" : {
+                image : sports,
+                topicName : "Sports"
+            },
+            "worldNews" : {
+                image : worldNews,
+                topicName : "World News"
+            },
+            "others" : {
+                image : others,
+                topicName : "others"
+            }
         }
 
         const isFilled = this.props.user.surveysFilled.includes(this.props.id);
@@ -121,7 +121,7 @@ class SurveyCard extends React.Component {
                     <div className="card-content">
                         <div className="size17 main-heading">{this.props.survey.title}</div>
                         <p className='text-muted mb-1 mt-0'>by {this.props.survey.byUser}</p>
-                        <p>Topic : {topicName}</p>
+                        <p>Topic : {cardDetails[this.props.survey.topic].topicName}</p>
                         <p className='size11'>{this.props.survey.description}</p>
                         {
                             (isFilled || isOwned) ? null : <p className='text-muted mb-0'>{this.props.survey.responses} people took part in this survey</p>
@@ -133,7 +133,7 @@ class SurveyCard extends React.Component {
                             isOwned ? <p className='text-muted size11'>You own this survey</p> : null
                         }
                     </div>
-                    {image}
+                    <img src={cardDetails[this.props.survey.topic].image} />
                 </div>
                 <hr className='my-4'/>
                 <div id="button-region" className = {`${this.props.align}-align`}>
