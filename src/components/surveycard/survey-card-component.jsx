@@ -133,7 +133,7 @@ class SurveyCard extends React.Component {
                             isOwned ? <p className='text-muted size11'>You own this survey</p> : null
                         }
                     </div>
-                    <img src={cardDetails[this.props.survey.topic].image} />
+                    <img alt="img" src={cardDetails[this.props.survey.topic].image} />
                 </div>
                 <hr className='my-4'/>
                 <div id="button-region" className = {`${this.props.align}-align`}>
