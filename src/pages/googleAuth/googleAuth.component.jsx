@@ -70,7 +70,7 @@ class GoogleAuth extends React.Component {
                     this.state.isLoading ? <Loader text='Signing you in'/> : null
                 }
                 <div id="home-link" onClick={() => this.props.history.push('/')}>
-                    <i class="mr-3 fas fa-home"></i>
+                    <i className="mr-3 fas fa-home"></i>
                     Back to home
                 </div>
                 <Row id='auth-inner'>
@@ -84,9 +84,6 @@ class GoogleAuth extends React.Component {
                                 <br/>
                                 Witness easy-to-create surveys with a clean & beatiful graphical representation of the results.
                             </p>
-                            {/* <button onClick={() => {
-                                this.props.history.push('/');
-                            }} className='btn'>Back to homepage</button> */}
                         </div>
                     </Col>
                     <Col md={6} lg={5} id='signin-form'>
