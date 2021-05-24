@@ -1,9 +1,9 @@
 import authActionTypes from './authTypes';
 
-export const LogUserIn = () => ({
+export const logUserIn = () => ({
     type : authActionTypes.LOGIN
 })
 
-export const LofUserOut = () => ({
+export const logUserOut = () => ({
     type : authActionTypes.LOGOUT
 })

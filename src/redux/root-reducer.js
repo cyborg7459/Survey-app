@@ -15,7 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     users : userReducer,
     surveys : surveysReducer,
-    loginState : authReducer
+    auth : authReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);
