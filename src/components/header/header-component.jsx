@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import './header-style.scss';
 import {firestore} from '../../firebase/firebase.utils';
-import {logUserOut} from '../../redux/users/user-actions';
+import { logUserOut } from '../../redux/users/user-actions';
+import { logUserOutState } from '../../redux/auth/authActions';
 import Loader from '../loader/loader.component';
 
 class Header extends React.Component {
@@ -25,7 +26,8 @@ class Header extends React.Component {
         })
         const userRef = firestore.collection('users').doc(this.props.users.currentUser.id);
         await userRef.update({isLoggedIn : false});
-        this.props.logOut();
+        await this.props.logOutState();
+        await this.props.logOut();
         this.setState({
             isLoading : false
         })
@@ -39,7 +41,7 @@ class Header extends React.Component {
                 }
                 <div id="header">
                     <span onClick={() => {
-                        this.props.history.push('/');
+                        this.props.history.push('/surveys');
                     }} style={{cursor : 'pointer'}} className='size20'>What's your opinion ?</span>
                     {
                         this.props.users.currentUser ? 
@@ -53,35 +55,13 @@ class Header extends React.Component {
     }
 }
 
-// const Header = (props) => {
-
-    
-
-    
-
-//     return (
-//         <div id="header-container">
-//             <div id="header">
-//                 <span onClick={() => {
-//                     props.history.push('/');
-//                 }} style={{cursor : 'pointer'}} className='size20'>What's your opinion ?</span>
-//                 {
-//                     users.currentUser ? 
-//                     <span className='size13'> Signed in as <strong>{users.currentUser.name.split(' ')[0]}</strong> &nbsp; &nbsp; <span onClick={() => props.logOut()} style={{cursor: 'pointer'}}>Sign out</span> </span> 
-//                     : 
-//                     <span className='size13' style={{cursor : 'pointer'}} onClick={() => {props.history.push('/login')}}>Login</span>
-//                 }
-//             </div>
-//         </div>
-//     )
-// }
-
 const mapStateToProps = state => ({
     users : state.users
 });
 
 const mapDispatchToProps = dispatch => ({
-    logOut : () => dispatch(logUserOut())
+    logOut : () => dispatch(logUserOut()),
+    logOutState : () => dispatch(logUserOutState())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
