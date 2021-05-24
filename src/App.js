@@ -19,15 +19,15 @@ class App extends React.Component {
       <div className='app'>
         <Header />
         <Switch>
-          <Route exact path="/" render = {() => !this.props.user.currentUser ? (<Homepage/>) : (<Redirect to='/surveys'/>)}/>
-          <Route exact path='/auth' render = {() => this.props.user.currentUser ? (<Redirect to = '/surveys' />) : (<GoogleAuth />)} />
+          <Route exact path="/" component={Homepage}/>
+          <Route exact path='/auth' render = {() => this.props.loginState.isLoggedIn ? (<Redirect to = '/surveys' />) : (<GoogleAuth />)} />
           <Route exact path = '/surveys' render = {() => (<Redirect to = '/surveys/active' />)}></Route>
-          <Route exact path = '/surveys/active' render = {() => this.props.user.currentUser ? (<Main active={true}/>) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/surveys/archived' render = {() => this.props.user.currentUser ? (<Main active={false}/>) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/profile' render = {() => this.props.user.currentUser ? (<ProfilePage />) : (<Redirect to='/auth' />)} />
+          <Route exact path = '/surveys/active' render = {() => this.props.loginState.isLoggedIn ? (<Main active={true}/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/surveys/archived' render = {() => this.props.loginState.isLoggedIn ? (<Main active={false}/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/surveys/addnew' render = {() => this.props.loginState.isLoggedIn ? (<NewSurveyPage/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/survey/:id' render = {() => this.props.loginState.isLoggedIn ? (<SurveyPage/>) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/survey/:id/results' render = {() => this.props.loginState.isLoggedIn ? (<ResultPage />) : (<Redirect to='/auth'/>)} />
+          <Route exact path = '/profile' render = {() => this.props.loginState.isLoggedIn ? (<ProfilePage />) : (<Redirect to='/auth' />)} />
           <Route exact path = '/error' component = {ErrorPage} />
           <Route component={ErrorPage}/>
         </Switch>
@@ -37,7 +37,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user : state.users
+  loginState : state.loginState
 });
 
 export default connect(mapStateToProps)(App);
