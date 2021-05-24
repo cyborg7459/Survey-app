@@ -27,11 +27,15 @@ class GoogleAuth extends React.Component {
             const userSnap = await userRef.get();
             if(!userSnap.empty) {
                 const user = userSnap.docs[0].data();
+                const id = userSnap.docs[0].id;
+                const userRef = firestore.collection('users').doc(id);
+                await userRef.update({isLoggedIn : true});
                 this.props.setUser(user);
             }
             else {
                 const user = {
                     email : res.user.email,
+                    isLoggedIn : true,
                     name : res.user.displayName,
                     uid : res.user.uid,
                     surveysFilled : [],
