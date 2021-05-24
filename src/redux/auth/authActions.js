@@ -4,6 +4,6 @@ export const logUserIn = () => ({
     type : authActionTypes.LOGIN
 })
 
-export const logUserOut = () => ({
+export const logUserOutState = () => ({
     type : authActionTypes.LOGOUT
 })
