@@ -1,5 +1,5 @@
 import SurveyActionTypes from './surveys-types';
-import {filterSurveys} from './surveys-utils';
+import {filterSurveys, sortSurveys} from './surveys-utils';
 
 const INITIAL_STATE = {
     surveys : [],
@@ -18,6 +18,16 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 surveysToDisplay : filterSurveys(state.surveys, action.payload)
+            }
+        case SurveyActionTypes.RESET_FILTERS :
+            return {
+                ...state,
+                surveysToDisplay : state.surveys
+            }
+        case SurveyActionTypes.SET_SURVEYS :
+            return {
+                ...state,
+                surveysToDisplay : sortSurveys(state.surveys, action.payload)
             }
         default:
             return state

@@ -9,3 +9,7 @@ export const filterSurveysByTopic = topic => ({
     type : SurveyActionTypes.FILTER_SURVEYS,
     payload : topic
 })
+
+export const resetFilters = () => ({
+    type : SurveyActionTypes.RESET_FILTERS
+})

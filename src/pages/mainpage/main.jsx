@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
 import SurveyCard from '../../components/surveycard/survey-card-component';
-import { setSurveys } from '../../redux/surveys/surveys-actions';
+import { setSurveys, filterSurveysByTopic, resetFilters } from '../../redux/surveys/surveys-actions';
 
 class Main extends React.Component {
 
@@ -14,8 +14,8 @@ class Main extends React.Component {
         isLoading : true
     }
 
-    componentDidMount() {
-        this.getSurveys();
+    async componentDidMount() {
+        await this.getSurveys();
     }
 
     getSurveys = async () => {
@@ -50,6 +50,9 @@ class Main extends React.Component {
                             this.props.history.push('/surveys/addnew')
                         }} className='mb-4 btn'>Create your own survey</button>
                     </div>
+                    {
+                        (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
+                    }
                     <Row className="surveys-container">
                         {
                             this.props.surveys.surveysToDisplay.map((survey, idx) => {
@@ -72,7 +75,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setSurveysToState : surveys => dispatch(setSurveys(surveys))
+    setSurveysToState : surveys => dispatch(setSurveys(surveys)),
+    filterSurveysByTopic : topic => dispatch(filterSurveysByTopic(topic)),
+    resetFilters : () => dispatch(resetFilters())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
