@@ -1,7 +1,8 @@
 import SurveyActionTypes from './surveys-types';
 
 const INITIAL_STATE = {
-    surveys : []
+    surveys : [],
+    surveysToDisplay: []
 }
 
 const surveysReducer = (state = INITIAL_STATE, action) => {
@@ -9,7 +10,8 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
         case SurveyActionTypes.SET_SURVEYS : 
             return {
                 ...state,
-                surveys : action.payload
+                surveys : action.payload,
+                surveysToDisplay : action.payload
             }
         default:
             return state
