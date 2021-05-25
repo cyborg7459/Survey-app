@@ -4,7 +4,6 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer from './users/user-reducer';
 import surveysReducer from './surveys/surveys-reducer';
-import authReducer from './auth/authReducer';
 
 const persistConfig = {
     key : 'root',
@@ -14,8 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     users : userReducer,
-    surveys : surveysReducer,
-    auth : authReducer
+    surveys : surveysReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);

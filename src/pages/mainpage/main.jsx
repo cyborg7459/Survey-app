@@ -54,7 +54,7 @@ class Main extends React.Component {
                         {
                             this.props.surveys.surveys.map((survey, idx) => {
                                 return (
-                                    <Col sm={12}>
+                                    <Col key={survey.id} sm={12}>
                                         <SurveyCard align={ idx%2===0 ? 'right' : 'left'} key={survey.id} id={survey.id} survey={survey}/>
                                     </Col>
                                 )

@@ -7,7 +7,6 @@ import './googleAuth-styles.scss';
 import { provider, firestore } from '../../firebase/firebase.utils';
 import firebase from '../../firebase/firebase.utils';
 import { setUser } from '../../redux/users/user-actions';
-import { logUserIn } from '../../redux/auth/authActions';
 import loginImg from '../../gallery/login.svg';
 import googleIcon from '../../gallery/google.png';
 import Loader from '../../components/loader/loader.component';
@@ -32,7 +31,6 @@ class GoogleAuth extends React.Component {
                 const userRef = firestore.collection('users').doc(id);
                 await userRef.update({isLoggedIn : true});
                 this.props.setUser(user);
-                this.props.logIn();
             }
             else {
                 const user = {
@@ -60,7 +58,6 @@ class GoogleAuth extends React.Component {
         user.id = newUser.id;
         newUser.set(user);
         this.props.setUser(user);
-        this.props.logIn();
     }
 
     render() {
@@ -99,13 +96,8 @@ class GoogleAuth extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    authState : state.auth
-})
-
 const mapDispatchToProps = dispatch => ({
-    setUser : user => dispatch(setUser(user)),
-    logIn : () => dispatch(logUserIn())
+    setUser : user => dispatch(setUser(user))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GoogleAuth));
+export default withRouter(connect(null, mapDispatchToProps)(GoogleAuth));

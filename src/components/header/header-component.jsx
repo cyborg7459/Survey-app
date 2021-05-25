@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import './header-style.scss';
 import {firestore} from '../../firebase/firebase.utils';
 import { logUserOut } from '../../redux/users/user-actions';
-import { logUserOutState } from '../../redux/auth/authActions';
 import Loader from '../loader/loader.component';
 
 class Header extends React.Component {
@@ -26,7 +25,6 @@ class Header extends React.Component {
         })
         const userRef = firestore.collection('users').doc(this.props.users.currentUser.id);
         await userRef.update({isLoggedIn : false});
-        await this.props.logOutState();
         await this.props.logOut();
         this.setState({
             isLoading : false
@@ -60,8 +58,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    logOut : () => dispatch(logUserOut()),
-    logOutState : () => dispatch(logUserOutState())
+    logOut : () => dispatch(logUserOut())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
