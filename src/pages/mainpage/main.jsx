@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
 import SurveyCard from '../../components/surveycard/survey-card-component';
-import { setSurveys, filterSurveysByTopic, resetFilters } from '../../redux/surveys/surveys-actions';
+import { setSurveys, filterSurveysByTopic, resetFilters, sortSurveys } from '../../redux/surveys/surveys-actions';
 
 class Main extends React.Component {
 
@@ -16,6 +16,12 @@ class Main extends React.Component {
 
     async componentDidMount() {
         await this.getSurveys();
+        setTimeout(() => {
+            this.props.sortSurveys({
+                key: "responses",
+                inc: true
+            })
+        }, 4000);
     }
 
     getSurveys = async () => {
@@ -77,7 +83,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     setSurveysToState : surveys => dispatch(setSurveys(surveys)),
     filterSurveysByTopic : topic => dispatch(filterSurveysByTopic(topic)),
-    resetFilters : () => dispatch(resetFilters())
+    resetFilters : () => dispatch(resetFilters()),
+    sortSurveys : params => dispatch(sortSurveys(params))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

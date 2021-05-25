@@ -13,3 +13,8 @@ export const filterSurveysByTopic = topic => ({
 export const resetFilters = () => ({
     type : SurveyActionTypes.RESET_FILTERS
 })
+
+export const sortSurveys = params => ({
+    type : SurveyActionTypes.SORT_SURVEYS,
+    payload : params
+})

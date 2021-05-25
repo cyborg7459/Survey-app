@@ -5,18 +5,18 @@ export const filterSurveys = (surveyItems, topic) => {
 }
 
 export const sortSurveys = (surveyItems, params) => {
-    return surveyItems.sort((item1, item2) => {
-        if(params.name === "title") {
-            if(params.inc === true) 
-                return item1.title < item2.title
+    return surveyItems.sort((a, b) => {
+        if(params.key === "title") {
+            if(params.inc)
+                return (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0
             else 
-                return item1.title > item2.title
+                return (a.title > b.title) ? -1 : (a.title < b.title) ? 1 : 0 
         }
         else {
-            if(params.inc === true)
-                return item1.responses < item2.responses
-            else
-                return item1.responses > item2.responses
+            if(params.inc)
+                return (a.responses > b.responses) ? 1 : (a.responses < b.responses) ? -1 : 0
+            else 
+                return (a.responses > b.responses) ? -1 : (a.responses < b.responses) ? 1 : 0 
         }
     })
 }

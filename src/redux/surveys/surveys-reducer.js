@@ -24,7 +24,7 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 surveysToDisplay : state.surveys
             }
-        case SurveyActionTypes.SET_SURVEYS :
+        case SurveyActionTypes.SORT_SURVEYS :
             return {
                 ...state,
                 surveysToDisplay : sortSurveys(state.surveys, action.payload)
