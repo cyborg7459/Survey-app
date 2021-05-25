@@ -16,12 +16,6 @@ class Main extends React.Component {
 
     async componentDidMount() {
         await this.getSurveys();
-        setTimeout(() => {
-            this.props.sortSurveys({
-                key: "responses",
-                inc: true
-            })
-        }, 4000);
     }
 
     getSurveys = async () => {
@@ -55,6 +49,32 @@ class Main extends React.Component {
                         <button onClick = {() => {
                             this.props.history.push('/surveys/addnew')
                         }} className='mb-4 btn'>Create your own survey</button>
+                    </div>
+                    <div id="sorting-links" className='text-right mb-4'>
+                        <p className='mb-0'>Sort by name : 
+                            <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                this.props.sortSurveys({key: "title", inc: true});
+                            }}>
+                                <i class="ml-1 fas fa-sort-alpha-down"></i>
+                            </span> 
+                            <span style={{cursor: "pointer"}} onClick={() => {
+                                this.props.sortSurveys({key: "title", inc: false});
+                            }}>
+                                <i class="ml-1 fas fa-sort-alpha-down-alt"></i>
+                            </span> 
+                        </p>
+                        <p>Sort by responses : 
+                            <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                this.props.sortSurveys({key: "responses", inc: true});
+                            }}>
+                                <i class="ml-1 fas fa-sort-numeric-down"></i>
+                            </span> 
+                            <span style={{cursor: "pointer"}} onClick={() => {
+                                this.props.sortSurveys({key: "responses", inc: false});
+                            }}>
+                                <i class="ml-1 fas fa-sort-numeric-down-alt"></i>
+                            </span>
+                        </p>
                     </div>
                     {
                         (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
