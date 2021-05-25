@@ -117,12 +117,11 @@ class NewSurveyPage extends React.Component {
                         className = "input mb-1 size17 py-3 px-0"
                         placeholder = "Enter a title for your survey ..."
                         style = {{
-                            backgroundColor : "#f9f9f9",
                             borderBottom : "none"
                         }}
                     />
 
-                    <select style={{backgroundColor: "#f9f9f9"}} className='input mb-5 px-0' name="survey-topic" id="survey-topic">
+                    <select className='input mb-5 px-0' name="survey-topic" id="survey-topic">
                         <option className='text-muted' value={null}>Select a topic for the survey ...</option>
                         <option value="sports">Sports</option>
                         <option value="education">Education</option>
@@ -145,7 +144,7 @@ class NewSurveyPage extends React.Component {
                         style = {{
                             width : "100%",
                             border : "none",
-                            boxShadow : "1px 2px 5px rgba(0,0,0,0.3)",
+                            boxShadow : "1px 2px 8px rgba(0,0,0,0.15)",
                             marginBottom : "50px",
                             borderRadius : "10px",
                             padding : "25px"

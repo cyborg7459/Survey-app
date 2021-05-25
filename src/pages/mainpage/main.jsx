@@ -52,7 +52,7 @@ class Main extends React.Component {
                     </div>
                     <Row className="surveys-container">
                         {
-                            this.props.surveys.surveys.map((survey, idx) => {
+                            this.props.surveys.surveysToDisplay.map((survey, idx) => {
                                 return (
                                     <Col key={survey.id} sm={12}>
                                         <SurveyCard align={ idx%2===0 ? 'right' : 'left'} key={survey.id} id={survey.id} survey={survey}/>
