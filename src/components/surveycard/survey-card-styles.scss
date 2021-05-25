@@ -1,10 +1,17 @@
 .survey-card-outer {
     background-color: white;
-    padding: 30px 25px!important;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.10);
+    padding: 40px 30px;
+    padding-bottom: 20px;
+    box-shadow: 3px 3px 11px rgba(0,0,0,0.14);
     border-radius: 8px;
     margin-bottom: 50px!important;
     transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    // border: 1px solid #f5f5f5!important;
+
+    &:hover {
+        transform: scale(1.008);
+        box-shadow: 3px 7px 14px rgba(0,0,0,0.15), 5px 5px 5px rgba(0,0,0,0.08);
+    }
 
     #button-region {
         display: flex;
@@ -13,13 +20,18 @@
             justify-content: flex-end;
         }
     }
+
+    @media(max-width: 700px) {
+        padding: 20px 5px;
+    } 
 }
 
 .btn-outline {
     width: auto;
+    text-align: center;
     background-color: white!important;
     border: 1px solid;
-    padding: 8px 25px!important;
+    padding: 8px 25px;
     border-radius: 5px;
     margin: 0px 10px;
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
@@ -115,7 +127,8 @@
         margin-bottom: auto;
 
         @media(max-width: 700px) {
-            width: 300px;
+            width: 250px;
+            height: auto;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 50px;

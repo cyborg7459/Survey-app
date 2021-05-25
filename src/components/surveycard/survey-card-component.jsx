@@ -135,7 +135,7 @@ class SurveyCard extends React.Component {
                     </div>
                     <img alt="img" src={cardDetails[this.props.survey.topic].image} />
                 </div>
-                <hr className='my-4'/>
+                <hr className='my-3 mx-2'/>
                 <div id="button-region" className = {`${this.props.align}-align`}>
                     {
                         mainButton
