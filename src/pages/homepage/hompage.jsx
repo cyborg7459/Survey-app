@@ -26,6 +26,16 @@ class Homepage extends React.Component {
                         isLoading: false
                     })
                 }
+                else {
+                    this.setState({
+                        isLoading: false
+                    })
+                }
+            } 
+            else {
+                this.setState({
+                    isLoading: false
+                })
             }
         }
         else {
@@ -33,6 +43,7 @@ class Homepage extends React.Component {
                 isLoading: false
             })
         }
+
     }
 
     render() {
