@@ -7,16 +7,25 @@ import {firestore} from '../../firebase/firebase.utils';
 import { logUserOut } from '../../redux/users/user-actions';
 import Loader from '../loader/loader.component';
 import userImg from '../../gallery/user.png';
+import HeaderPopup from '../headerPopup/header-popup-component';
 
 class Header extends React.Component {
 
     state = {
-        isLoading : false
+        isLoading : false,
+        showMenu : true
     }
 
     componentDidMount() {
         this.setState({
-            isLoading : false
+            isLoading : false,
+            showMenu : false
+        })
+    }
+
+    hideMenu = () => {
+        this.setState({
+            showMenu : false
         })
     }
     
@@ -39,12 +48,19 @@ class Header extends React.Component {
                     this.state.isLoading ? <Loader text = "Signing you out" /> : null
                 }
                 <div id="header">
+                    {
+                        this.state.showMenu ? <HeaderPopup hide={this.hideMenu} /> : null
+                    }
                     <h1 onClick={() => {
                         this.props.history.push('/surveys');
                     }} style={{cursor : 'pointer'}}>What's your opinion ?</h1>
                     {
                         this.props.users.currentUser ? 
-                        <span  style={{cursor : 'pointer'}} className='size13'>
+                        <span onClick={() => {
+                            this.setState({
+                                showMenu: !this.state.showMenu
+                            })
+                        }} style={{cursor : 'pointer'}} className='size13'>
                             <strong>
                                 {this.props.users.currentUser.name.split(' ')[0]}
                                 <img src={userImg} alt="user" />
