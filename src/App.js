@@ -23,7 +23,6 @@ class App extends React.Component {
           <Route exact path='/auth' render = {() => this.props.user.currentUser ? (<Redirect to = '/surveys' />) : (<GoogleAuth />)} />
           <Route exact path = '/surveys' render = {() => (<Redirect to = '/surveys/active' />)}></Route>
           <Route exact path = '/surveys/active' render = {() => this.props.user.currentUser ? (<Main active={true}/>) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/surveys/archived' render = {() => this.props.user.currentUser ? (<Main active={false}/>) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/auth'/>)} />
