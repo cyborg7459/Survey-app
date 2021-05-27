@@ -49,7 +49,7 @@ class Header extends React.Component {
                 }
                 <div id="header">
                     {
-                        this.state.showMenu ? <HeaderPopup hide={this.hideMenu} /> : null
+                        this.state.showMenu ? <HeaderPopup logout={this.logOutUser} hide={this.hideMenu} /> : null
                     }
                     <h1 onClick={() => {
                         this.props.history.push('/surveys');

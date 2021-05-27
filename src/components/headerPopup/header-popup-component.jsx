@@ -2,7 +2,6 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import './header-popup-styles.scss';
-import { logUserOut } from '../../redux/users/user-actions';
 
 const HeaderPopup = props => {
     return (
@@ -23,8 +22,4 @@ const mapStateToProps = state => ({
     user : state.users
 })
 
-const mapDispatchToProps = dispatch => ({
-    logout : () => dispatch(logUserOut())
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderPopup));
+export default withRouter(connect(mapStateToProps, null)(HeaderPopup));
