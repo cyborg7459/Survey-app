@@ -6,6 +6,7 @@ import './header-style.scss';
 import {firestore} from '../../firebase/firebase.utils';
 import { logUserOut } from '../../redux/users/user-actions';
 import Loader from '../loader/loader.component';
+import userImg from '../../gallery/user.png';
 
 class Header extends React.Component {
 
@@ -38,16 +39,24 @@ class Header extends React.Component {
                     this.state.isLoading ? <Loader text = "Signing you out" /> : null
                 }
                 <div id="header">
-                    <span onClick={() => {
+                    <h1 onClick={() => {
                         this.props.history.push('/surveys');
-                    }} style={{cursor : 'pointer'}} className='size20'>What's your opinion ?</span>
+                    }} style={{cursor : 'pointer'}}>What's your opinion ?</h1>
                     {
                         this.props.users.currentUser ? 
-                        <span className='size13'> Signed in as <strong>{this.props.users.currentUser.name.split(' ')[0]}</strong> &nbsp; &nbsp; <span onClick={this.logOutUser} style={{cursor: 'pointer'}}>Sign out</span> </span> 
+                        <span  style={{cursor : 'pointer'}} className='size13'>
+                            <strong>
+                                {this.props.users.currentUser.name.split(' ')[0]}
+                                <img src={userImg} alt="user" />
+                            </strong>
+                        </span> 
                         : 
-                        <span className='size13' style={{cursor : 'pointer'}} onClick={() => {this.props.history.push('/login')}}>Login</span>
+                        <span className='size13' style={{cursor : 'pointer'}} onClick={() => {this.props.history.push('/login')}}>
+                            Login    
+                        </span>
                     }
                 </div>
+                <hr />
             </div>
         )
     }
