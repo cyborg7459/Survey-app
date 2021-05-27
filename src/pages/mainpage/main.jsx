@@ -72,33 +72,40 @@ class Main extends React.Component {
                             this.props.history.push('/surveys/addnew')
                         }} className='mb-4 btn'>Create your own survey</button>
                     </div>
-                    <div id="sorting-links" className='text-right mb-4'>
-                        <p className='mb-0'>Sort by name : 
-                            <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
-                                this.props.sortSurveys({key: "title", inc: true});
-                            }}>
-                                <i class="ml-1 fas fa-sort-alpha-down"></i>
-                            </span> 
-                            <span style={{cursor: "pointer"}} onClick={() => {
-                                this.props.sortSurveys({key: "title", inc: false});
-                            }}>
-                                <i class="ml-1 fas fa-sort-alpha-down-alt"></i>
-                            </span> 
-                        </p>
-                        <p>Sort by responses : 
-                            <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
-                                this.props.sortSurveys({key: "responses", inc: true});
-                            }}>
-                                <i class="ml-1 fas fa-sort-numeric-down"></i>
-                            </span> 
-                            <span style={{cursor: "pointer"}} onClick={() => {
-                                this.props.sortSurveys({key: "responses", inc: false});
-                            }}>
-                                <i class="ml-1 fas fa-sort-numeric-down-alt"></i>
-                            </span>
-                        </p>
-                        <p onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i class="fas mr-2 fa-filter"></i>Filter by topic</p>
-                    </div>
+                    
+                    <Row id="sorting-links" className='mb-4'>
+                        <Col sm={6}>
+                            <p className='mb-0'>Sort by name : 
+                                <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                    this.props.sortSurveys({key: "title", inc: true});
+                                }}>
+                                    <i class="ml-1 fas fa-sort-alpha-down"></i>
+                                </span> 
+                                <span style={{cursor: "pointer"}} onClick={() => {
+                                    this.props.sortSurveys({key: "title", inc: false});
+                                }}>
+                                    <i class="ml-1 fas fa-sort-alpha-down-alt"></i>
+                                </span> 
+                            </p>
+                            <p>Sort by responses : 
+                                <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                    this.props.sortSurveys({key: "responses", inc: true});
+                                }}>
+                                    <i class="ml-1 fas fa-sort-numeric-down"></i>
+                                </span> 
+                                <span style={{cursor: "pointer"}} onClick={() => {
+                                    this.props.sortSurveys({key: "responses", inc: false});
+                                }}>
+                                    <i class="ml-1 fas fa-sort-numeric-down-alt"></i>
+                                </span>
+                            </p>
+                        </Col>
+                        <Col sm={6} className='text-sm-right'>
+                            <p className='mb-0' onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i className="fas mr-2 fa-filter"></i>Filter by topic</p>
+                            <p onClick={this.props.resetFilters} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
+                        </Col>
+                    </Row>
+                       
                     {
                         (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
                     }
