@@ -2,7 +2,8 @@ const SurveyActionTypes = {
     SET_SURVEYS : 'SET_SURVEYS',
     FILTER_SURVEYS : 'FLITER_SURVEYS',
     RESET_FILTERS : 'RESET_FILTERS',
-    SORT_SURVEYS : 'SORT_SURVEYS'
+    SORT_SURVEYS : 'SORT_SURVEYS',
+    FILTER_ON_ATTEMPTED : 'FILTER_ON_ATTEMPTED'
 }
 
 export default SurveyActionTypes;

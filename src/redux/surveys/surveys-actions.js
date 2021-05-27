@@ -18,3 +18,8 @@ export const sortSurveys = params => ({
     type : SurveyActionTypes.SORT_SURVEYS,
     payload : params
 })
+
+export const filterAttempted = params => ({
+    type : SurveyActionTypes.FILTER_ON_ATTEMPTED,
+    payload : params
+})
