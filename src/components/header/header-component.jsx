@@ -60,7 +60,7 @@ class Header extends React.Component {
                             this.setState({
                                 showMenu: !this.state.showMenu
                             })
-                        }} style={{cursor : 'pointer'}} className='size13'>
+                        }} style={{cursor : 'pointer'}}>
                             <strong>
                                 {this.props.users.currentUser.name.split(' ')[0]}
                                 <img src={userImg} alt="user" />

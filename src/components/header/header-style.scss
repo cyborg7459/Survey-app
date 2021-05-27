@@ -28,7 +28,7 @@
         font-size: 35px;
 
         @media(max-width: 700px) {
-            font-size: 24px;
+            font-size: 22px;
         }
     }
 
@@ -42,10 +42,19 @@
         align-items: center;
         position: relative;
 
+        @media(max-width: 700px) {
+            font-size: 18px;
+        }
+
         img {
             height: 32px;
             margin-left: 12px;
             margin-bottom: 4px;
+
+            @media(max-width: 700px) {
+                height: 24px;
+                margin-left: 5px;
+            }
         }
     }
 }
