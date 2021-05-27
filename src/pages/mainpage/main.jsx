@@ -13,7 +13,9 @@ class Main extends React.Component {
 
     state = {
         isLoading : true,
-        showFilterDialogue : false
+        showFilterDialogue : false,
+        filterTopic : null,
+        filterTopic1 : null
     }
 
     async componentDidMount() {
@@ -34,13 +36,23 @@ class Main extends React.Component {
 
     filterSurveys = topic => {
         this.props.filterSurveysByTopic(topic);
+        this.setState({
+            filterTopic : topic
+        })
         this.hideFilterDialogue();
     }
 
     filterSurveysOnAttemptStatus = bool => {
         this.props.filterByAttemptStatus({
             user : this.props.user.currentUser,
-            attempted : bool
+            attempted : bool,
+            topic : this.state.filterTopic
+        })
+        let msg = '';
+        if(bool) msg += 'Attempted/Owned';
+        else msg += 'Unattempted';
+        this.setState({
+            filterTopic1 : msg
         })
     }
 
@@ -64,6 +76,29 @@ class Main extends React.Component {
     }
 
     render() {
+
+        const topics = {
+            "business" :  "Business",
+            "curAffairs" : "Current Affairs",
+            "education" : "Education",
+            "health" : "Health",
+            "movies" : "Movies",
+            "music" : "Music",
+            "politics" : "Politics",
+            "science" : "Science",
+            "sports" : "Sports",
+            "worldNews" : "World News",
+            "others" : "Others"
+        }
+
+        let filterMessage = '';
+        if(this.state.filterTopic && this.state.filterTopic1)
+            filterMessage = 'Filters Applied : ' + topics[this.state.filterTopic] + ', ' + this.state.filterTopic1;
+        else if(this.state.filterTopic1)
+            filterMessage = 'Filters Applied : ' + this.state.filterTopic1;
+        else if(this.state.filterTopic)
+            filterMessage = 'Filters Applied : ' + topics[this.state.filterTopic];
+
         return (
             <div className="page-container">
                 {
@@ -112,17 +147,26 @@ class Main extends React.Component {
                                 }
                             }>Display unattempted surveys<i className="fas mx-2 fa-filter"></i></p>
                         </Col>
+
                         <Col sm={6} className='text-sm-right'>
                             <p className='mb-1' onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i className="fas mr-2 fa-filter"></i>Filter by topic</p>
-                            <p className='mb-1' onClick={this.props.resetFilters} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
+                            <p className='mb-1' onClick={() => {
+                                this.props.resetFilters();
+                                this.setState({
+                                    filterTopic : null,
+                                    filterTopic1 : null
+                                })
+                            }} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
                             <p className='mb-1' style={{cursor : "pointer"}} onClick = {
                                 () => {
                                     this.filterSurveysOnAttemptStatus(true);
                                 }
                             }><i className="fas mr-2 fa-clipboard-check"></i>Display filled/owned surveys</p>
-                            
                         </Col>
                     </Row>
+                    {
+                        <div className='text-danger mb-3 text-right'>{filterMessage}</div>
+                    }
                     {
                         (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
                     }

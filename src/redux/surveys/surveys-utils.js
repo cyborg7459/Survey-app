@@ -29,8 +29,10 @@ export const filterAttempted = (surveyItems, params) => {
         const id = survey.id;
         const a = currentUser.surveysFilled.find(el => el === id);
         const b = currentUser.surveysOwned.find(el => el === id);
-        if((bool && (a || b)) || (!bool && !a && !b))
-            filteredSurveys.push(survey);
+        if((bool && (a || b)) || (!bool && !a && !b)) {
+            if(!params.topic || (params.topic && survey.topic === params.topic))
+                filteredSurveys.push(survey);
+        }
     })
     return filteredSurveys;
 }

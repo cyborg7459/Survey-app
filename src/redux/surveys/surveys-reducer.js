@@ -31,7 +31,7 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
         case SurveyActionTypes.SORT_SURVEYS :
             return {
                 ...state,
-                surveysToDisplay : sortSurveys(state.surveys, action.payload)
+                surveysToDisplay : sortSurveys(state.surveysToDisplay, action.payload)
             }
 
         case SurveyActionTypes.FILTER_ON_ATTEMPTED : 
