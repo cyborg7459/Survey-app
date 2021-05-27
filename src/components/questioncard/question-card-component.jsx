@@ -28,7 +28,7 @@ class QuestionCard extends React.Component {
                         return (
                             <div onClick={(e) => {
                                 this.sendResponseToState(e)
-                            }} className={`size13 btn option option-${this.props.question.id}`} key={option.id} id = {option.id}>
+                            }} className={`size13 option option-${this.props.question.id}`} key={option.id} id = {option.id}>
                                 {option.optionVal}
                             </div>
                         )

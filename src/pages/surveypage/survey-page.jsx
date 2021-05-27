@@ -151,7 +151,7 @@ class SurveyPage extends React.Component {
                             {
                                 this.state.surveyQuestions.map(surveyQuestion => {
                                     return (
-                                        <Col key = {surveyQuestion.id} lg = {6}>
+                                        <Col key = {surveyQuestion.id} md = {6}>
                                             <QuestionCard setSurveyResponse = {this.setSurveyResponse} key = {surveyQuestion.id} question = {surveyQuestion}></QuestionCard>
                                         </Col> 
                                     )
