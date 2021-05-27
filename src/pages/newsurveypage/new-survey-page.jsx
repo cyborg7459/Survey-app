@@ -117,11 +117,14 @@ class NewSurveyPage extends React.Component {
                         className = "input mb-1 size17 py-3 px-0"
                         placeholder = "Enter a title for your survey ..."
                         style = {{
-                            borderBottom : "none"
+                            borderBottom : "none",
+                            background : "none"
                         }}
                     />
 
-                    <select className='input mb-5 px-0' name="survey-topic" id="survey-topic">
+                    <select style = {{
+                            background : "none"
+                        }} className='input mb-5 px-0' name="survey-topic" id="survey-topic">
                         <option className='text-muted' value={null}>Select a topic for the survey ...</option>
                         <option value="sports">Sports</option>
                         <option value="education">Education</option>
