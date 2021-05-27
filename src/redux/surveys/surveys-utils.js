@@ -21,14 +21,14 @@ export const sortSurveys = (surveyItems, params) => {
     })
 }
 
-export const filterOnAttempt = (surveyItems, params) => {
+export const filterAttempted = (surveyItems, params) => {
     let filteredSurveys = [];
     const currentUser = params.user;
     const bool = params.attempted;
     surveyItems.forEach(survey => {
         const id = survey.id;
-        const a = currentUser.surveysFilled.find(id);
-        const b = currentUser.surveysOwned.find(id);
+        const a = currentUser.surveysFilled.find(el => el === id);
+        const b = currentUser.surveysOwned.find(el => el === id);
         if((bool && (a || b)) || (!bool && !a && !b))
             filteredSurveys.push(survey);
     })

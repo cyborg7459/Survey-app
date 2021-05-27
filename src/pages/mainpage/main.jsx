@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
 import SurveyCard from '../../components/surveycard/survey-card-component';
-import { setSurveys, filterSurveysByTopic, resetFilters, sortSurveys } from '../../redux/surveys/surveys-actions';
+import { setSurveys, filterSurveysByTopic, resetFilters, sortSurveys, filterAttempted } from '../../redux/surveys/surveys-actions';
 import FilterDialogue from '../../components/filterDialogue/filter-dialogue-component';
 
 class Main extends React.Component {
@@ -35,6 +35,13 @@ class Main extends React.Component {
     filterSurveys = topic => {
         this.props.filterSurveysByTopic(topic);
         this.hideFilterDialogue();
+    }
+
+    filterSurveysOnAttemptStatus = bool => {
+        this.props.filterByAttemptStatus({
+            user : this.props.user.currentUser,
+            attempted : bool
+        })
     }
 
     getSurveys = async () => {
@@ -79,32 +86,40 @@ class Main extends React.Component {
                                 <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
                                     this.props.sortSurveys({key: "title", inc: true});
                                 }}>
-                                    <i class="ml-1 fas fa-sort-alpha-down"></i>
+                                    <i className="ml-1 fas fa-sort-alpha-down"></i>
                                 </span> 
                                 <span style={{cursor: "pointer"}} onClick={() => {
                                     this.props.sortSurveys({key: "title", inc: false});
                                 }}>
-                                    <i class="ml-1 fas fa-sort-alpha-down-alt"></i>
+                                    <i className="ml-1 fas fa-sort-alpha-down-alt"></i>
                                 </span> 
                             </p>
                             <p className='mb-1'>Sort by responses : 
                                 <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
                                     this.props.sortSurveys({key: "responses", inc: true});
                                 }}>
-                                    <i class="ml-1 fas fa-sort-numeric-down"></i>
+                                    <i className="ml-1 fas fa-sort-numeric-down"></i>
                                 </span> 
                                 <span style={{cursor: "pointer"}} onClick={() => {
                                     this.props.sortSurveys({key: "responses", inc: false});
                                 }}>
-                                    <i class="ml-1 fas fa-sort-numeric-down-alt"></i>
+                                    <i className="ml-1 fas fa-sort-numeric-down-alt"></i>
                                 </span>
                             </p>
-                            <p style={{cursor : "pointer"}}>Display unattempted surveys<i className="fas mx-2 fa-filter"></i></p>
+                            <p style={{cursor : "pointer"}} onClick = {
+                                () => {
+                                    this.filterSurveysOnAttemptStatus(false);
+                                }
+                            }>Display unattempted surveys<i className="fas mx-2 fa-filter"></i></p>
                         </Col>
                         <Col sm={6} className='text-sm-right'>
                             <p className='mb-1' onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i className="fas mr-2 fa-filter"></i>Filter by topic</p>
                             <p className='mb-1' onClick={this.props.resetFilters} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
-                            <p className='mb-1' style={{cursor : "pointer"}}><i className="fas mr-2 fa-clipboard-check"></i>Display filled/owned surveys</p>
+                            <p className='mb-1' style={{cursor : "pointer"}} onClick = {
+                                () => {
+                                    this.filterSurveysOnAttemptStatus(true);
+                                }
+                            }><i className="fas mr-2 fa-clipboard-check"></i>Display filled/owned surveys</p>
                             
                         </Col>
                     </Row>
@@ -129,14 +144,16 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    surveys : state.surveys
+    surveys : state.surveys,
+    user : state.users
 });
 
 const mapDispatchToProps = dispatch => ({
     setSurveysToState : surveys => dispatch(setSurveys(surveys)),
     filterSurveysByTopic : topic => dispatch(filterSurveysByTopic(topic)),
     resetFilters : () => dispatch(resetFilters()),
-    sortSurveys : params => dispatch(sortSurveys(params))
+    sortSurveys : params => dispatch(sortSurveys(params)),
+    filterByAttemptStatus : params => dispatch(filterAttempted(params))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

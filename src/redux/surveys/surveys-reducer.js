@@ -1,5 +1,5 @@
 import SurveyActionTypes from './surveys-types';
-import {filterSurveys, sortSurveys, filterOnAttempt} from './surveys-utils';
+import {filterSurveys, sortSurveys, filterAttempted} from './surveys-utils';
 
 const INITIAL_STATE = {
     surveys : [],
@@ -37,7 +37,7 @@ const surveysReducer = (state = INITIAL_STATE, action) => {
         case SurveyActionTypes.FILTER_ON_ATTEMPTED : 
             return {
                 ...state, 
-                surveysToDisplay : filterOnAttempt(state.surveys, action.payload)
+                surveysToDisplay : filterAttempted(state.surveys, action.payload)
             }
 
         default:
