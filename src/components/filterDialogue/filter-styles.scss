@@ -1,0 +1,17 @@
+#filter-dialgue {
+    background-color: white;
+    padding: 20px 25px;
+    border-radius: 7px;
+    width: 90%;
+    max-width: 450px;
+
+    #heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    h1 {
+        font-weight: 600!important;
+    }
+}

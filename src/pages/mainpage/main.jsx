@@ -7,15 +7,34 @@ import Loader from '../../components/loader/loader.component'
 import { firestore } from '../../firebase/firebase.utils';
 import SurveyCard from '../../components/surveycard/survey-card-component';
 import { setSurveys, filterSurveysByTopic, resetFilters, sortSurveys } from '../../redux/surveys/surveys-actions';
+import FilterDialogue from '../../components/filterDialogue/filter-dialogue-component';
 
 class Main extends React.Component {
 
     state = {
-        isLoading : true
+        isLoading : true,
+        showFilterDialogue : false
     }
 
     async componentDidMount() {
         await this.getSurveys();
+    }
+
+    displayFilterDialogue = () => {
+        this.setState({
+            showFilterDialogue: true
+        })
+    }
+
+    hideFilterDialogue = () => {
+        this.setState({
+            showFilterDialogue: false
+        })
+    }
+
+    filterSurveys = topic => {
+        this.props.filterSurveysByTopic(topic);
+        this.hideFilterDialogue();
     }
 
     getSurveys = async () => {
@@ -42,6 +61,9 @@ class Main extends React.Component {
             <div className="page-container">
                 {
                     this.state.isLoading ? <Loader text='Fetching surveys'/> : null
+                }
+                {
+                    this.state.showFilterDialogue ? <FilterDialogue hide={this.hideFilterDialogue} filter={this.filterSurveys} /> : null
                 }
                 <div className="page-inner">
                     <div className="mb-5 d-flex justify-content-between align-items-center">
@@ -75,6 +97,7 @@ class Main extends React.Component {
                                 <i class="ml-1 fas fa-sort-numeric-down-alt"></i>
                             </span>
                         </p>
+                        <p onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i class="fas mr-2 fa-filter"></i>Filter by topic</p>
                     </div>
                     {
                         (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
