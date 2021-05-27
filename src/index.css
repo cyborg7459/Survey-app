@@ -102,7 +102,7 @@ h1 {
 
 @media(max-width: 1200px) {
   body {
-    background-position-y: 0px;
+    background-position-y: 50px;
   }
   .main-heading {
     font-size: 5vw;
