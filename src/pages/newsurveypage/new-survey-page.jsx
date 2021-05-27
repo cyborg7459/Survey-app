@@ -109,7 +109,7 @@ class NewSurveyPage extends React.Component {
                 }
                 <div className="page-inner">
                     <h1 className='main-heading'>Create your own survey</h1>
-                    <h1 className='mb-4 size14'>Learn the world's views on topics that matter to you</h1>
+                    <h1 className='mb-4 size13'>Learn the world's views on topics that matter to you</h1>
                     <input 
                         required = {true}
                         type = "text"

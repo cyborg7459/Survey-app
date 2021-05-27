@@ -150,6 +150,12 @@
 }
 
 @media(max-width: 700px) {
+    .size15 {
+        font-size: 1.2rem!important;
+    }
+    .size17 {
+        font-size: 1.4rem!important;
+    }
     .size19 {
         font-size: 0.9rem!important;
     }
