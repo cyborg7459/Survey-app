@@ -146,7 +146,11 @@ class SurveyPage extends React.Component {
             return (
                 <div className="page-container">
                     <div className="page-inner">
-                        <div className="size28 d-flex align-items-center main-heading">{this.state.surveyDetails.title} | <span className='ml-4 size13'>by {this.state.surveyDetails.byUser}</span></div>
+                        <div className="size28 d-flex align-items-center main-heading">{this.state.surveyDetails.title} | <span className='ml-4 size13'>by {this.state.surveyDetails.byUser}</span>
+                        <span onClick={() => {
+                            this.props.history.push(`/profile/${this.state.surveyDetails.ownerID}`)
+                        }} style={{cursor: "pointer"}} className='size12 ml-2'>(view profile)</span>
+                        </div>
                         <Row>
                             {
                                 this.state.surveyQuestions.map(surveyQuestion => {

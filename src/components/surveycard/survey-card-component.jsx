@@ -120,7 +120,9 @@ class SurveyCard extends React.Component {
                 <div className={`${this.props.align}-align survey-card`}>
                     <div className="card-content">
                         <div className="size17 main-heading">{this.props.survey.title}</div>
-                        <p className='text-muted mb-1 mt-0'>by {this.props.survey.byUser}</p>
+                        <p onClick={()=>{
+                            this.props.history.push(`/profile/${this.props.survey.ownerID}`)
+                        }} style={{cursor: "pointer"}} className='text-muted mb-1 mt-0'>by {this.props.survey.byUser}</p>
                         <p>Topic : {cardDetails[this.props.survey.topic].topicName}</p>
                         <p className='size11'>{this.props.survey.description}</p>
                         {
