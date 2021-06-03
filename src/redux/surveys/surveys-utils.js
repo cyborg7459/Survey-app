@@ -22,6 +22,7 @@ export const sortSurveys = (surveyItems, params) => {
 }
 
 export const filterAttempted = (surveyItems, params) => {
+    console.log(params);
     let filteredSurveys = [];
     const currentUser = params.user;
     const bool = params.attempted;
