@@ -194,7 +194,10 @@ class ProfilePage extends React.Component {
                                         onClick = {this.viewUnarchivedSurveys} className='text-center'>
                                             View all surveys
                                         </p>
-                                        : null
+                                        : <p style={{cursor : "pointer"}}
+                                        onClick = {this.viewArchivedSurveys} className='text-center'>
+                                            View archived surveys
+                                        </p>
                                     }
                                 </div>
                                 
