@@ -16,13 +16,21 @@ import politics from '../../gallery/politics.png';
 import science from '../../gallery/science.png';
 import sports from '../../gallery/sports.png';
 import worldNews from '../../gallery/worldNews.png';
+import Loader from '../loader/loader.component';
 
 class SurveyCard extends React.Component {
+
+    state = {
+        isLoading : false
+    }
 
     toggleSurveyArchivedStatus = async () => {
         const surveyRef = firestore.collection('surveys').doc(this.props.id);
         const surveySnap = await surveyRef.get();
         await surveyRef.update({archived : !surveySnap.data().archived});
+        this.setState({
+            isLoading : false
+        })
     }
 
     render() {
@@ -78,7 +86,7 @@ class SurveyCard extends React.Component {
         const isOwned = this.props.user.surveysOwned.includes(this.props.id);
 
         let customButton;
-        if(this.props.match.path.split('/')[2] === 'archived') {
+        if(this.props.survey.archived) {
             customButton = (
                 <div onClick={this.toggleSurveyArchivedStatus} className='btn-outline btn-green' style={{
                     backgroundColor: "green",
@@ -117,6 +125,9 @@ class SurveyCard extends React.Component {
 
         return (
             <div className="survey-card-outer">
+                {
+                    this.state.isLoading ? <Loader text = "Please wait" /> : null
+                }
                 <div className={`${this.props.align}-align survey-card`}>
                     <div className="card-content">
                         <div className="size17 main-heading">{this.props.survey.title}</div>

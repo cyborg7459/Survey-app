@@ -9,6 +9,7 @@ const HeaderPopup = props => {
             <div onClick = {() => {
                 props.hide();
                 props.history.push(`/profile/${props.user.currentUser.id}`);
+                document.location.reload();
             }}><i className="fas mr-3 fa-user"></i>My Profile</div>
             <div onClick={() => {
                 props.hide();

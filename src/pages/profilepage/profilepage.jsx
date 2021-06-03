@@ -12,12 +12,17 @@ import EditProfileDialogue from '../../components/editProfile/editProfile-compon
 class ProfilePage extends React.Component {
 
     state = {
+        userID : this.props.match.params.id,
         isLoading : true,
         surveys : [],
+        showingArchives : false,
         isEditing : false
     }
 
     async componentDidMount() {
+        this.setState({
+            isLoading : true
+        })
         const userID = this.props.match.params.id;
         const userRef = firestore.collection('users').doc(userID);
 
@@ -28,20 +33,22 @@ class ProfilePage extends React.Component {
         })
 
         const surveysRef = firestore.collection('surveys').where('ownerID', '==', userID);
-        const surveysSnap = await (await surveysRef.get()).docs;
-        let surveys = surveysSnap.map(snap => {
-            return {
-                ...snap.data(),
-                id : snap.id
-            }
-        });
-        surveys = surveys.filter(survey => {
-            return !survey.archived
-        })
 
+        surveysRef.onSnapshot(survey => {
+            const surveysSnap = survey.docs;
+            let surveys = surveysSnap.map(snap => {
+                return {
+                    ...snap.data(),
+                    id : snap.id
+                }
+            });
+            this.setState({
+                surveys
+            })
+        })
+        
         this.setState({
             isLoading : false,
-            surveys
         })
     }
 
@@ -57,22 +64,41 @@ class ProfilePage extends React.Component {
         })
     }
 
+    viewArchivedSurveys = () => {
+        this.setState({
+            showingArchives: true,
+            surveys : [...this.state.surveys]
+        })
+    }
+
+    viewUnarchivedSurveys = () => {
+        this.setState({
+            showingArchives: false
+        })
+    }
+
     render() {
 
         let surveyCards = [];
+        let surveysToDisplay = this.state.surveys.filter(survey => {
+            if(this.state.showingArchives)
+                return survey.archived;
+            else
+                return !survey.archived
+        });
 
-        this.state.surveys.forEach(survey => {
+        surveysToDisplay.forEach(survey => {
             const card = (
                 <SurveyCard key={survey.id} id={survey.id} survey={survey}/>
             )
             surveyCards.push(card);
         })
 
-        if(!this.state.userDetails) {
+        if(this.state.isLoading || !this.state.userDetails) {
             return (
                 <div className="page-container">
                     {
-                        this.state.isLoading ? <Loader text="Fetching user data" /> : null
+                        <Loader text="Fetching user data" />
                     }
                 </div>
             )
@@ -124,18 +150,49 @@ class ProfilePage extends React.Component {
                         </div>
                         {
                             surveyCards.length > 0 ? 
-                            (
+                             (
                                 <div className='mt-5' id="surveys-section">
                                     <h3>Surveys owned by {this.state.userDetails.name} </h3>
+                                    {
+                                        this.props.match.params.id === this.props.user.currentUser.id 
+                                        ? ( 
+                                            <div>
+                                            {
+                                                this.state.showingArchives 
+                                                ? 
+                                                (
+                                                    <span onClick={this.viewUnarchivedSurveys} style={{cursor : "pointer"}} id='imgEdit' className='mt-1'>
+                                                        (View active surveys)
+                                                    </span>
+                                                ) : 
+                                                (
+                                                    <span onClick={this.viewArchivedSurveys} style={{cursor : "pointer"}} id='imgEdit' className='mt-1'>
+                                                    (View archives)
+                                                    </span>)
+                                            }
+                                            </div>             
+                                        ) : null
+                                    }
                                     <hr className='mb-5' />
                                     {surveyCards}
                                 </div>
                             )
                             :
                             (
-                                <p className='mt-5 text-center size15'>
-                                    {this.state.userDetails.name} does not own any surveys 
-                                </p>
+                                <div>
+                                    <p className='mt-5 text-center size15'>
+                                        No surveys to display
+                                    </p>
+                                    {
+                                        this.state.showingArchives ? 
+                                        <p style={{cursor : "pointer"}}
+                                        onClick = {this.viewUnarchivedSurveys} className='text-center'>
+                                            View all surveys
+                                        </p>
+                                        : null
+                                    }
+                                </div>
+                                
                             )
                         }
                         
