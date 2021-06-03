@@ -20,7 +20,13 @@ class ProfilePage extends React.Component {
     async componentDidMount() {
         const userID = this.props.match.params.id;
         const userRef = firestore.collection('users').doc(userID);
-        const userSnap = await userRef.get();
+
+        userRef.onSnapshot(user => {
+            this.setState({
+                userDetails : user.data()
+            })
+        })
+
         const surveysRef = firestore.collection('surveys').where('ownerID', '==', userID);
         const surveysSnap = await (await surveysRef.get()).docs;
         let surveys = surveysSnap.map(snap => {
@@ -35,7 +41,6 @@ class ProfilePage extends React.Component {
 
         this.setState({
             isLoading : false,
-            userDetails : userSnap.data(),
             surveys
         })
     }
