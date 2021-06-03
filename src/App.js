@@ -26,7 +26,7 @@ class App extends React.Component {
           <Route exact path = '/surveys/addnew' render = {() => this.props.user.currentUser ? (<NewSurveyPage/>) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/survey/:id' render = {() => this.props.user.currentUser ? (<SurveyPage/>) : (<Redirect to='/auth'/>)} />
           <Route exact path = '/survey/:id/results' render = {() => this.props.user.currentUser ? (<ResultPage />) : (<Redirect to='/auth'/>)} />
-          <Route exact path = '/profile' render = {() => this.props.user.currentUser ? (<ProfilePage />) : (<Redirect to='/auth' />)} />
+          <Route exact path = '/profile/:id' render = {() => this.props.user.currentUser ? (<ProfilePage />) : (<Redirect to='/auth' />)} />
           <Route exact path = '/error' component = {ErrorPage} />
           <Route component={ErrorPage}/>
         </Switch>
