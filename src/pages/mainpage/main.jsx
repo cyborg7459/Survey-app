@@ -99,91 +99,97 @@ class Main extends React.Component {
         else if(this.state.filterTopic)
             filterMessage = 'Filters Applied : ' + topics[this.state.filterTopic];
 
-        return (
-            <div className="page-container">
-                {
-                    this.state.isLoading ? <Loader text='Fetching surveys'/> : null
-                }
-                {
-                    this.state.showFilterDialogue ? <FilterDialogue hide={this.hideFilterDialogue} filter={this.filterSurveys} /> : null
-                }
-                <div className="page-inner">
-                    <div className="mb-0 d-flex justify-content-between align-items-center">
-                        <h1 className='main-heading size30'>Active surveys</h1>
-                        <button onClick = {() => {
-                            this.props.history.push('/surveys/addnew')
-                        }} className='mb-4 btn'>Create your own</button>
-                    </div>
-                    <hr className='mb-4 mt-0' />
-                    <Row id="sorting-links" className='mb-1'>
-                        <Col className='d-flex flex-column justify-content-end' sm={6}>
-                            <p className='mb-1'>Sort by name : 
-                                <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
-                                    this.props.sortSurveys({key: "title", inc: true});
-                                }}>
-                                    <i className="ml-1 fas fa-sort-alpha-down"></i>
-                                </span> 
-                                <span style={{cursor: "pointer"}} onClick={() => {
-                                    this.props.sortSurveys({key: "title", inc: false});
-                                }}>
-                                    <i className="ml-1 fas fa-sort-alpha-down-alt"></i>
-                                </span> 
-                            </p>
-                            <p className='mb-1'>Sort by responses : 
-                                <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
-                                    this.props.sortSurveys({key: "responses", inc: true});
-                                }}>
-                                    <i className="ml-1 fas fa-sort-numeric-down"></i>
-                                </span> 
-                                <span style={{cursor: "pointer"}} onClick={() => {
-                                    this.props.sortSurveys({key: "responses", inc: false});
-                                }}>
-                                    <i className="ml-1 fas fa-sort-numeric-down-alt"></i>
-                                </span>
-                            </p>
-                            <p style={{cursor : "pointer"}} onClick = {
-                                () => {
-                                    this.filterSurveysOnAttemptStatus(false);
-                                }
-                            }>Display unattempted surveys<i className="fas mx-2 fa-filter"></i></p>
-                        </Col>
-
-                        <Col sm={6} className='text-sm-right'>
-                            <p className='mb-1' onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i className="fas mr-2 fa-filter"></i>Filter by topic</p>
-                            <p className='mb-1' onClick={() => {
-                                this.props.resetFilters();
-                                this.setState({
-                                    filterTopic : null,
-                                    filterTopic1 : null
-                                })
-                            }} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
-                            <p className='mb-1' style={{cursor : "pointer"}} onClick = {
-                                () => {
-                                    this.filterSurveysOnAttemptStatus(true);
-                                }
-                            }><i className="fas mr-2 fa-clipboard-check"></i>Display filled/owned surveys</p>
-                        </Col>
-                    </Row>
-                    {
-                        <div className='text-danger mb-3 text-right'>{filterMessage}</div>
-                    }
-                    {
-                        (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
-                    }
-                    <Row className="surveys-container">
-                        {
-                            this.props.surveys.surveysToDisplay.map((survey, idx) => {
-                                return (
-                                    <Col key={survey.id} sm={12}>
-                                        <SurveyCard align={ idx%2===0 ? 'right' : 'left'} key={survey.id} id={survey.id} survey={survey}/>
-                                    </Col>
-                                )
-                            })
-                        }
-                    </Row>
+        if(this.state.isLoading) {
+            return (
+                <div className="page-containee">
+                    <Loader text='Fetching surveys'/> 
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return (
+                <div className="page-container">
+                    {
+                        this.state.showFilterDialogue ? <FilterDialogue hide={this.hideFilterDialogue} filter={this.filterSurveys} /> : null
+                    }
+                    <div className="page-inner">
+                        <div className="mb-0 d-flex justify-content-between align-items-center">
+                            <h1 className='main-heading size30'>Active surveys</h1>
+                            <button onClick = {() => {
+                                this.props.history.push('/surveys/addnew')
+                            }} className='mb-4 btn'>Create your own</button>
+                        </div>
+                        <hr className='mb-4 mt-0' />
+                        <Row id="sorting-links" className='mb-1'>
+                            <Col className='d-flex flex-column justify-content-end' sm={6}>
+                                <p className='mb-1'>Sort by name : 
+                                    <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                        this.props.sortSurveys({key: "title", inc: true});
+                                    }}>
+                                        <i className="ml-1 fas fa-sort-alpha-down"></i>
+                                    </span> 
+                                    <span style={{cursor: "pointer"}} onClick={() => {
+                                        this.props.sortSurveys({key: "title", inc: false});
+                                    }}>
+                                        <i className="ml-1 fas fa-sort-alpha-down-alt"></i>
+                                    </span> 
+                                </p>
+                                <p className='mb-1'>Sort by responses : 
+                                    <span style={{cursor: "pointer"}} className='mx-2' onClick={() => {
+                                        this.props.sortSurveys({key: "responses", inc: true});
+                                    }}>
+                                        <i className="ml-1 fas fa-sort-numeric-down"></i>
+                                    </span> 
+                                    <span style={{cursor: "pointer"}} onClick={() => {
+                                        this.props.sortSurveys({key: "responses", inc: false});
+                                    }}>
+                                        <i className="ml-1 fas fa-sort-numeric-down-alt"></i>
+                                    </span>
+                                </p>
+                                <p style={{cursor : "pointer"}} onClick = {
+                                    () => {
+                                        this.filterSurveysOnAttemptStatus(false);
+                                    }
+                                }>Display unattempted surveys<i className="fas mx-2 fa-filter"></i></p>
+                            </Col>
+    
+                            <Col sm={6} className='text-sm-right'>
+                                <p className='mb-1' onClick={this.displayFilterDialogue} style={{cursor : "pointer"}}><i className="fas mr-2 fa-filter"></i>Filter by topic</p>
+                                <p className='mb-1' onClick={() => {
+                                    this.props.resetFilters();
+                                    this.setState({
+                                        filterTopic : null,
+                                        filterTopic1 : null
+                                    })
+                                }} style={{cursor: "pointer"}}><i className="fas mr-2 fa-sync"></i>Reset filters</p>
+                                <p className='mb-1' style={{cursor : "pointer"}} onClick = {
+                                    () => {
+                                        this.filterSurveysOnAttemptStatus(true);
+                                    }
+                                }><i className="fas mr-2 fa-clipboard-check"></i>Display filled/owned surveys</p>
+                            </Col>
+                        </Row>
+                        {
+                            <div className='text-danger mb-3 text-right'>{filterMessage}</div>
+                        }
+                        {
+                            (this.props.surveys.surveysToDisplay.length === 0) ? <h1 className='text-center mt-5 size20'>Sorry, no surveys to display at the moment</h1> : null
+                        }
+                        <Row className="surveys-container">
+                            {
+                                this.props.surveys.surveysToDisplay.map((survey, idx) => {
+                                    return (
+                                        <Col key={survey.id} sm={12}>
+                                            <SurveyCard align={ idx%2===0 ? 'right' : 'left'} key={survey.id} id={survey.id} survey={survey}/>
+                                        </Col>
+                                    )
+                                })
+                            }
+                        </Row>
+                    </div>
+                </div>
+            )
+        }   
     }
 }
 
