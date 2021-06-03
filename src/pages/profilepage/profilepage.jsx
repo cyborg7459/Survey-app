@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from '../../components/loader/loader.component';
 import { withRouter } from 'react-router-dom';
-// import {Row, Col} from 'react-bootstrap';
+import { connect } from 'react-redux'; 
 
 import './profilepage-styles.scss';
 import {firestore} from '../../firebase/firebase.utils';
@@ -64,7 +64,9 @@ class ProfilePage extends React.Component {
                 <div className="page-container">
                     <div className="page-inner">
                         <div id="top-section">
-                            <img src={profileIcon} alt="user" />
+                            <div>
+                                <img src={profileIcon} alt="user" />
+                            </div>
                             <div>
                                 <h1 className='size30'>{this.state.userDetails.name}</h1>
                                     <h5>{this.state.userDetails.email}</h5>
@@ -79,6 +81,15 @@ class ProfilePage extends React.Component {
                                             </div>
                                         )
                                         : null
+                                    }
+                                    {
+                                        this.props.match.params.id === this.props.user.currentUser.id 
+                                        ? (
+                                            <p style={{cursor : "pointer"}} id='imgEdit' className='mt-1'>
+                                                <i className="far mr-3 fa-edit"></i>
+                                                Edit profile
+                                            </p>
+                                        ) : null
                                     }
                             </div>
                         </div>
@@ -106,4 +117,8 @@ class ProfilePage extends React.Component {
     }
 }
 
-export default withRouter(ProfilePage);
+const mapStateToProps = state => ({
+    user : state.users
+})
+
+export default withRouter(connect(mapStateToProps)(ProfilePage));
