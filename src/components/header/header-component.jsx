@@ -6,7 +6,7 @@ import './header-style.scss';
 import {firestore} from '../../firebase/firebase.utils';
 import { logUserOut } from '../../redux/users/user-actions';
 import Loader from '../loader/loader.component';
-import userImg from '../../gallery/user.png';
+import userImg from '../../gallery/profile.png';
 import HeaderPopup from '../headerPopup/header-popup-component';
 
 class Header extends React.Component {
@@ -63,7 +63,12 @@ class Header extends React.Component {
                         }} style={{cursor : 'pointer'}}>
                             <strong>
                                 {this.props.users.currentUser.name.split(' ')[0]}
-                                <img src={userImg} alt="user" />
+                                {
+                                    this.props.users.currentUser.imageUrl ? 
+                                    <img src={this.props.users.currentUser.imageUrl} alt="user" />
+                                    : <img src={userImg} alt="user" />
+                                }
+                                
                             </strong>
                         </span> 
                         : 
