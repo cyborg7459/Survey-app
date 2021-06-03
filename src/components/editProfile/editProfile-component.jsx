@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { firestore } from '../../firebase/firebase.utils';
+import { firestore, storage } from '../../firebase/firebase.utils';
 import { setUser } from '../../redux/users/user-actions';
 import Loader from '../loader/loader.component';
 import './editProfile-styles.scss';
@@ -16,17 +16,35 @@ class EditProfileDialogue extends React.Component {
         this.setState({
             isLoading : true
         })
+
         const newName = document.getElementById('new-name').value;
+        const file = document.getElementById('new-image').files[0];
+        let url = null;
+
+        if(file) {
+            const storageRef = storage.ref();
+            const profileImageRef = await storageRef.child(`images/${file.name}`);
+            await profileImageRef.put(file);
+            url = await profileImageRef.getDownloadURL();
+        }
+
         const userRef = firestore.collection('users').doc(this.props.user.id);
-        await userRef.update({
+        let updateObj = {
             name: newName
-        });
+        };
+        if(url) updateObj.imageUrl = url;
+        await userRef.update(updateObj);
+
         const userSnap = await userRef.get();
         const user = {
             ...userSnap.data(),
             id : userRef.id
         }
+
         this.props.setUser(user);
+        this.setState({
+            isLoading : false
+        })
         this.props.hide();
     }
 
@@ -48,7 +66,7 @@ class EditProfileDialogue extends React.Component {
                     </div>
                     <div>
                         <strong className='size11 mr-4'>Profile image : </strong>
-                        <input type="file" accept="image/png, image/jpeg" />
+                        <input id='new-image' type="file" accept="image/png, image/jpeg" />
                     </div>
                     <div onClick={this.updateUser} className='btn mt-5'>Save changes</div>
                 </div>

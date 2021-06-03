@@ -89,7 +89,12 @@ class ProfilePage extends React.Component {
                     <div className="page-inner">
                         <div id="top-section">
                             <div>
-                                <img src={profileIcon} alt="user" />
+                                {
+                                    this.state.userDetails.imageUrl ?
+                                    <img src={this.state.userDetails.imageUrl} alt="user" />
+                                    :
+                                    <img src={profileIcon} alt="user" />
+                                }
                             </div>
                             <div>
                                 <h1 className='size30'>{this.state.userDetails.name}</h1>

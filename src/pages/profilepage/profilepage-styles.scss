@@ -4,12 +4,14 @@
 
     img {
         height: 250px;
+        width: 250px;
         margin-right: 40px;
         border-radius: 50%;
 
         @media(max-width: 700px) {
             height: 200px;
             margin-right: 0;
+            margin-bottom: 25px;
         }
     }
 
