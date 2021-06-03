@@ -7,12 +7,14 @@ import './profilepage-styles.scss';
 import {firestore} from '../../firebase/firebase.utils';
 import profileIcon from '../../gallery/profile.png'
 import SurveyCard from '../../components/surveycard/survey-card-component';
+import EditProfileDialogue from '../../components/editProfile/editProfile-component';
 
 class ProfilePage extends React.Component {
 
     state = {
         isLoading : true,
-        surveys : []
+        surveys : [],
+        isEditing : false
     }
 
     async componentDidMount() {
@@ -35,6 +37,18 @@ class ProfilePage extends React.Component {
             isLoading : false,
             userDetails : userSnap.data(),
             surveys
+        })
+    }
+
+    showEditDialogue = () => {
+        this.setState({
+            isEditing : true
+        })
+    }
+
+    hideEditDialogue = () => {
+        this.setState({
+            isEditing : false
         })
     }
 
@@ -62,6 +76,11 @@ class ProfilePage extends React.Component {
         else {
             return (
                 <div className="page-container">
+                    {
+                        this.state.isEditing ? 
+                        <EditProfileDialogue show={this.showEditDialogue} hide={this.hideEditDialogue} user={this.props.user.currentUser}/> 
+                        : null
+                    }
                     <div className="page-inner">
                         <div id="top-section">
                             <div>
@@ -85,10 +104,10 @@ class ProfilePage extends React.Component {
                                     {
                                         this.props.match.params.id === this.props.user.currentUser.id 
                                         ? (
-                                            <p style={{cursor : "pointer"}} id='imgEdit' className='mt-1'>
+                                            <span onClick={this.showEditDialogue} style={{cursor : "pointer"}} id='imgEdit' className='mt-1'>
                                                 <i className="far mr-3 fa-edit"></i>
                                                 Edit profile
-                                            </p>
+                                            </span>
                                         ) : null
                                     }
                             </div>
