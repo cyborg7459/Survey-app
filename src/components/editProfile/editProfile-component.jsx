@@ -22,6 +22,13 @@ class EditProfileDialogue extends React.Component {
         let url = null;
 
         if(file) {
+            const fileType = file.type;
+            if(fileType.substring(0,5) !== 'image') {
+                this.setState({
+                    isLoading : false
+                })
+                return alert("Please upload a valid image file");
+            }
             const storageRef = storage.ref();
             const profileImageRef = await storageRef.child(`images/${file.name}`);
             await profileImageRef.put(file);
@@ -66,7 +73,7 @@ class EditProfileDialogue extends React.Component {
                     </div>
                     <div>
                         <strong className='size11 mr-4'>Profile image : </strong>
-                        <input id='new-image' type="file" accept="image/png, image/jpeg" />
+                        <input id='new-image' type="file" accept="image/png, image/jpeg, image/jpg" />
                     </div>
                     <div onClick={this.updateUser} className='btn mt-5'>Save changes</div>
                 </div>
