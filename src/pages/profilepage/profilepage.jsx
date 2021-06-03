@@ -15,11 +15,16 @@ class ProfilePage extends React.Component {
         userID : this.props.match.params.id,
         isLoading : true,
         surveys : [],
+        userDetails : null,
         showingArchives : false,
         isEditing : false
     }
 
     async componentDidMount() {
+        await this.fillDetails();
+    }
+
+    fillDetails = async () => {
         this.setState({
             isLoading : true
         })

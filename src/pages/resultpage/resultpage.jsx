@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ResultCard from '../../components/resultcard/result-card';
 import Loader from '../../components/loader/loader.component';
@@ -9,7 +10,10 @@ class ResultPage extends React.Component {
 
     state = {
         isLoading : true,
-        data : {}
+        data : {},
+        ownerID : null, 
+        surveyID : null,
+        loaderMessage : "Fetching survey results"
     }
 
     async componentDidMount() {
@@ -26,6 +30,20 @@ class ResultPage extends React.Component {
         });
     }
 
+    deleteSurvey = async () => {
+        this.setState({
+            loaderMessage : "Deleting survey",
+            isLoading : true
+        })
+        const surveyRef = firestore.collection('surveys').doc(this.state.surveyID);
+        await surveyRef.delete();
+        this.setState({
+            loaderMessage : "Fetching survey results",
+            isLoading : false
+        })
+        this.props.history.push('/surveys');
+    }
+
     getSurveyData = async () => {
         const surveyID = this.props.match.params.id;
         const surveyRef = firestore.collection('surveys').doc(surveyID);
@@ -33,6 +51,10 @@ class ResultPage extends React.Component {
         if(!surveySnap.exists) {
             return this.props.history.push('/error');
         }
+        this.setState({
+            ownerID : surveySnap.data().ownerID,
+            surveyID : surveyRef.id
+        })
         const questionsRef = surveyRef.collection('questions');
         let questions = [];
         const questionsSnap = await questionsRef.get();
@@ -56,7 +78,7 @@ class ResultPage extends React.Component {
         
         if(this.state.isLoading) {
             return (
-                <Loader text = "Fetching survey results"/>
+                <Loader text = {this.state.loaderMessage}/>
             )
         }
 
@@ -67,6 +89,12 @@ class ResultPage extends React.Component {
                         <h1 className='main-heading'>Results | {this.state.data.title}</h1>
                         <h5 className='text-muted'>by {this.state.data.byUser}</h5>
                         <h5>{this.state.data.responses} people filled this survey</h5>
+                        {
+                            this.state.ownerID === this.props.user.currentUser.id 
+                            ? 
+                            <div onClick={this.deleteSurvey} style={{marginLeft : "0px", width : "300px", marginTop : "25px"}} className='btn-red btn-outline'>Delete survey</div>
+                            : null
+                        }
                         {
                             this.state.data.questions.map((dataPoint,idx) => {
                                 return (
@@ -82,4 +110,8 @@ class ResultPage extends React.Component {
     }
 }
 
-export default withRouter(ResultPage);
+const mapStateToProps = state => ({
+    user : state.users
+})
+
+export default withRouter(connect(mapStateToProps)(ResultPage));
