@@ -42,18 +42,24 @@ class Header extends React.Component {
     }
 
     render() {
+        
         return (
             <div id="header-container">
-                {
-                    this.state.isLoading ? <Loader text = "Signing you out" /> : null
+                {   
+                    this.state.isLoading ? <Loader text = "Signing you out" /> : null   
                 }
                 <div id="header">
-                    {
-                        this.state.showMenu ? <HeaderPopup logout={this.logOutUser} hide={this.hideMenu} /> : null
+                    {    
+                        this.state.showMenu ? <HeaderPopup logout={this.logOutUser} hide={this.hideMenu} /> : null     
                     }
-                    <h1 onClick={() => {
-                        this.props.history.push('/surveys');
-                    }} style={{cursor : 'pointer'}}>What's your opinion ?</h1>
+                    <h1 className='d-none d-sm-block' 
+                    onClick={() => { this.props.history.push('/surveys'); }} 
+                    style={{ cursor : 'pointer'}}>
+                        What's your opinion ?
+                    </h1>
+                    <i onClick={() => { this.props.history.push('/surveys'); }}  
+                    className="fas fa-home size25 ml-3 d-sm-none"
+                    style={{ cursor : 'pointer'}} />
                     {
                         this.props.users.currentUser ? 
                         <span onClick={() => {
