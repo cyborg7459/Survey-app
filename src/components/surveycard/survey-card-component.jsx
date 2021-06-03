@@ -94,7 +94,7 @@ class SurveyCard extends React.Component {
                     backgroundColor: "#a62c07",
                     padding: "7px 10px"
                 }}>
-                    Close survey
+                    Move to archives
                 </div> 
             )
         }
