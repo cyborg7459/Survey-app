@@ -54,7 +54,7 @@ class NewSurveyPage extends React.Component {
             topic : selectedTopic
         }
         await this.generateSurveyInDatabase(survey, questions);
-        this.props.history.push('/');
+        this.props.history.push('/surveys');
     }
 
     generateSurveyInDatabase = async (survey, questions) => {
