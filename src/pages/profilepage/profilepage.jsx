@@ -2,6 +2,7 @@ import React from 'react';
 import Loader from '../../components/loader/loader.component';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'; 
+import Helmet from 'react-helmet';
 
 import './profilepage-styles.scss';
 import {firestore} from '../../firebase/firebase.utils';
@@ -112,6 +113,9 @@ class ProfilePage extends React.Component {
         else {
             return (
                 <div className="page-container">
+                    <Helmet>
+                        <title>What's your opinion | {this.state.userDetails.name}</title>
+                    </Helmet>
                     {
                         this.state.isEditing ? 
                         <EditProfileDialogue show={this.showEditDialogue} hide={this.hideEditDialogue} user={this.props.user.currentUser}/> 
